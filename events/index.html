@@ -1,0 +1,733 @@
+
+<style>
+*{box-sizing:border-box;}
+.wrap{padding:1rem 0;}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem;}
+.tab{font-size:11px;font-weight:500;padding:5px 13px;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;transition:all .15s;}
+.tab.on{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary);}
+.phase{display:none;flex-direction:column;gap:10px;}
+.phase.on{display:flex;}
+.ev{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;}
+.ev-h{display:flex;align-items:center;gap:8px;padding:.8rem 1rem;cursor:pointer;}
+.ev-id{font-size:11px;font-weight:500;color:var(--color-text-tertiary);min-width:52px;flex-shrink:0;}
+.ev-name{font-size:13px;font-weight:500;color:var(--color-text-primary);flex:1;}
+.ev-badges{display:flex;gap:4px;flex-wrap:wrap;}
+.badge{font-size:10px;font-weight:500;padding:1px 7px;border-radius:10px;}
+.b-rnd{background:#F1EFE8;color:#444441;}
+.b-main{background:#E6F1FB;color:#0C447C;}
+.b-comp{background:#EEEDFE;color:#3C3489;}
+.b-boss{background:#FCEBEB;color:#791F1F;}
+.ev-arr{font-size:14px;color:var(--color-text-tertiary);flex-shrink:0;transition:transform .2s;}
+.ev-arr.on{transform:rotate(180deg);}
+.ev-body{border-top:0.5px solid var(--color-border-tertiary);padding:.85rem 1rem;display:none;}
+.ev-body.on{display:block;}
+.scene{font-size:12px;color:var(--color-text-secondary);line-height:1.65;margin:0 0 12px;font-style:italic;}
+.cl{font-size:10px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.05em;margin:0 0 6px;}
+.choice{border-radius:var(--border-radius-md);padding:8px 10px;margin-bottom:7px;}
+.ca{background:#EAF3DE;}.cb{background:#FAEEDA;}.cc{background:#FAECE7;}.cd{background:#F1EFE8;}.ce{background:#E6F1FB;}
+.ch{display:flex;align-items:flex-start;gap:6px;margin-bottom:4px;}
+.cl-label{font-size:11px;font-weight:500;}
+.ca .cl-label{color:#27500A;}.cb .cl-label{color:#633806;}.cc .cl-label{color:#712B13;}.cd .cl-label{color:#444441;}.ce .cl-label{color:#0C447C;}
+.lock{font-size:10px;font-weight:500;padding:1px 6px;border-radius:8px;background:#EEEDFE;color:#3C3489;flex-shrink:0;margin-top:2px;white-space:nowrap;}
+.ct{font-size:11px;color:var(--color-text-primary);line-height:1.45;margin:0 0 5px;}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px;}
+.chip{font-size:10px;font-weight:500;padding:1px 7px;border-radius:10px;}
+.csv{background:#E6F1FB;color:#0C447C;}
+.cmt{background:#EAF3DE;color:#27500A;}
+.cfood{background:#FAEEDA;color:#633806;}
+.cmoney{background:#E1F5EE;color:#085041;}
+.cskill{background:#EEEDFE;color:#3C3489;}
+.citem{background:#FAECE7;color:#712B13;}
+.ccomp{background:#F4C0D1;color:#72243E;}
+.cpen{background:#FCEBEB;color:#791F1F;}
+.cstory{background:#E6F1FB;color:#185FA5;}
+.cnote{font-size:10px;color:var(--color-text-secondary);margin-top:5px;font-style:italic;}
+</style>
+<div class="wrap">
+<div class="tabs">
+  <button class="tab on" onclick="show('p1')">Phase 1 · 2050년 탐사</button>
+  <button class="tab" onclick="show('p2a')">Phase 2-A · 2026 일상</button>
+  <button class="tab" onclick="show('p2b')">Phase 2-B · 음모 추적</button>
+  <button class="tab" onclick="show('p2c')">Phase 2-C · 클라이맥스</button>
+</div>
+
+<!-- ========== PHASE 1 ========== -->
+<div id="p1" class="phase on">
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P1-01</span><span class="ev-name">냉동 창고의 생존자</span>
+    <div class="ev-badges"><span class="badge b-rnd">랜덤</span><span class="badge b-main">빙하구역</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">빙하 구역 탐사 중 반쯤 얼어붙은 냉동 창고에서 노인 한 명이 웅크리고 있다. 인근 주민들은 이미 이주했고 노인은 거동이 불편해 남겨졌다. 벽에는 알 수 없는 낙서가 희미하게 남아있다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">냉매 회수 캡슐 필요</span><span class="cl-label">A. 캡슐로 창고 내부를 임시 보온한다</span></div>
+      <p class="ct">냉매를 역방향으로 활용해 공간 온도를 올린다. 노인이 안정을 찾으며 고마움에 낡은 메모를 건넨다.</p>
+      <div class="chips"><span class="chip csv">SV +15</span><span class="chip cmt">멘탈 +5</span><span class="chip cfood">식량 +5</span><span class="chip cstory">단서: 벽 낙서 "MJ-26-TRUST NO ONE"</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="lock">생분해 단열 폼 필요</span><span class="cl-label">B. 폼으로 창고 틈새를 막아준다</span></div>
+      <p class="ct">셀룰로오즈 발포폼을 틈새에 채워 냉기를 차단한다. 완전하진 않지만 버틸 수 있는 온도가 된다.</p>
+      <div class="chips"><span class="chip csv">SV +11</span><span class="chip cmt">멘탈 +3</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="cl-label">C. 옆에 앉아 이야기를 들어준다</span></div>
+      <p class="ct">스킬 없이도 할 수 있는 것. 온기는 없지만 사람의 온도가 있다.</p>
+      <div class="chips"><span class="chip csv">SV +4</span><span class="chip cmt">멘탈 +8</span></div>
+    </div>
+    <div class="choice cd">
+      <div class="ch"><span class="cl-label">D. 그냥 지나친다</span></div>
+      <div class="chips"><span class="chip cpen">SV -5</span><span class="chip cpen">멘탈 -8</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P1-02</span><span class="ev-name">플라스틱 섬의 아이들</span>
+    <div class="ev-badges"><span class="badge b-rnd">랜덤</span><span class="badge b-main">바다구역</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">미세플라스틱이 섬처럼 쌓인 해역. 어린아이 둘이 오염된 웅덩이를 생수인 줄 알고 마시려 한다. 멀리서 어른들이 무기력하게 바라보고 있다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">석세포 나노 필터 필요</span><span class="cl-label">A. 필터로 웅덩이 물을 정화한다</span></div>
+      <p class="ct">배 석세포 입자로 미세플라스틱을 걸러낸다. 아이들이 마실 수 있는 물이 만들어진다. 어른들이 몰려들어 방법을 배워간다.</p>
+      <div class="chips"><span class="chip csv">SV +15</span><span class="chip cfood">식량 +10</span><span class="chip cstory">단서: 아이 그림 속 낯선 여성 초상</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="lock">수면 정화 드론 필요</span><span class="cl-label">B. 드론으로 주변 쓰레기를 걷어낸다</span></div>
+      <p class="ct">웅덩이 주변 플라스틱을 제거해 오염원을 줄인다. 근본 해결은 아니지만 당장의 위험은 사라진다.</p>
+      <div class="chips"><span class="chip csv">SV +12</span><span class="chip citem">아이템: [바다의 파편] — 다음 수질 이벤트 자동 성공</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="cl-label">C. 마시지 말라고 소리친다</span></div>
+      <p class="ct">위험을 막는다. 그게 전부다.</p>
+      <div class="chips"><span class="chip csv">SV +4</span></div>
+    </div>
+    <div class="choice cd">
+      <div class="ch"><span class="cl-label">D. 내 식량을 나눠준다</span></div>
+      <p class="ct">물 문제는 해결 못 했지만 아이들이 당장 배를 채운다.</p>
+      <div class="chips"><span class="chip csv">SV +7</span><span class="chip cpen">식량 -8</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P1-03</span><span class="ev-name">산성 토양의 마지막 밭</span>
+    <div class="ev-badges"><span class="badge b-rnd">랜덤</span><span class="badge b-main">사막구역</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">산성화된 토양에서 혼자 농사를 고집하는 노인 농부. 작물은 이미 절반이 죽었다. 남은 것도 며칠 안에 망할 것 같다. 메마른 손으로 흙을 쥐었다 펴기를 반복하고 있다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">EM 활성 정화제 + 큐브팜 컨테이너 모두 필요</span><span class="cl-label">A. 토양을 중화하고 컨테이너 팜을 병행 설치한다</span></div>
+      <p class="ct">EM 활성액으로 산성을 중화하는 동시에 컨테이너 수직농장을 옆에 설치한다. 땅과 컨테이너 두 곳에서 동시에 생산이 가능해진다.</p>
+      <div class="chips"><span class="chip csv">SV +20</span><span class="chip cfood">식량 +15</span><span class="chip cfood">식량 +3/턴 (지속)</span><span class="chip cstory">단서: 메모지 "2040.03.11 — 계획대로"</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="lock">EM 활성 정화제 필요</span><span class="cl-label">B. 정화제로 토양을 중화한다</span></div>
+      <div class="chips"><span class="chip csv">SV +13</span><span class="chip cfood">식량 +12</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="lock">큐브팜 컨테이너 필요</span><span class="cl-label">C. 컨테이너 팜 설치를 제안한다</span></div>
+      <div class="chips"><span class="chip csv">SV +14</span><span class="chip cfood">식량 +3/턴 (지속)</span></div>
+    </div>
+    <div class="choice cd">
+      <div class="ch"><span class="lock">드론 방제 서비스 필요</span><span class="cl-label">D. 드론으로 해충을 방제한다</span></div>
+      <div class="chips"><span class="chip csv">SV +10</span><span class="chip cfood">식량 +8</span></div>
+    </div>
+    <div class="choice ce">
+      <div class="ch"><span class="cl-label">E. 포기하라고 한다</span></div>
+      <div class="chips"><span class="chip cpen">SV -6</span><span class="chip cpen">멘탈 -5</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P1-04</span><span class="ev-name">영원한 밤의 병원</span>
+    <div class="ev-badges"><span class="badge b-rnd">랜덤</span><span class="badge b-main">영원한 밤구역</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">에너지 고갈로 전력이 끊긴 병원. 인큐베이터 안의 신생아와 수술 중인 환자가 있다. 발전기 연료는 1시간치만 남았다. 의사가 세라의 소매를 잡는다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">가상발전소 앱 + 루카 동반 필요</span><span class="cl-label">A. 앱으로 인근 분산 발전기를 연결, 루카가 네트워크를 최적화한다</span></div>
+      <p class="ct">루카의 정신 감응으로 네트워크 최적 경로를 즉시 파악. 병원 전력이 완전 복구된다.</p>
+      <div class="chips"><span class="chip csv">SV +18</span><span class="chip cmt">멘탈 +10</span><span class="chip cstory">단서: 아버지 음성 녹음 "세라야, 미안해"</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="lock">가상발전소 앱 필요</span><span class="cl-label">B. 앱으로 인근 발전기를 연결한다</span></div>
+      <p class="ct">루카 없이도 작동하지만 최적화가 덜 돼 절반 전력만 확보. 인큐베이터는 살린다.</p>
+      <div class="chips"><span class="chip csv">SV +13</span><span class="chip cmt">멘탈 +5</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="lock">파보젠 보도블럭 + 전기차 리파워 키트 필요</span><span class="cl-label">C. 보도블럭과 폐차를 함께 동원해 임시 전력을 만든다</span></div>
+      <p class="ct">두 스킬을 조합해 병원 앞 통행인의 운동에너지 + 폐차 배터리로 수술실과 인큐베이터를 모두 살린다.</p>
+      <div class="chips"><span class="chip csv">SV +16</span><span class="chip cmoney">자금 +8</span></div>
+    </div>
+    <div class="choice cd">
+      <div class="ch"><span class="lock">전기차 리파워 키트 필요</span><span class="cl-label">D. 폐차를 즉시 개조해 임시 발전기로 쓴다</span></div>
+      <div class="chips"><span class="chip csv">SV +11</span><span class="chip cmoney">자금 +5</span></div>
+    </div>
+    <div class="choice ce">
+      <div class="ch"><span class="cl-label">E. 아무것도 못 하고 자리를 뜬다</span></div>
+      <div class="chips"><span class="chip cpen">SV -10</span><span class="chip cpen">멘탈 -15</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P1-05</span><span class="ev-name">떠돌이 호랑이</span>
+    <div class="ev-badges"><span class="badge b-rnd">랜덤</span><span class="badge b-comp">나비 이탈 이벤트</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">탐사 중 거대한 변이 고양이과 동물과 마주친다. 방사능 영향으로 비정상적으로 성장한 것 같다. 나비가 그 앞에서 꼿꼿이 서서 시선을 마주치고 있다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">나비 동반 필요</span><span class="cl-label">A. 나비와 거대 고양이를 이어준다</span></div>
+      <p class="ct">나비가 천천히 다가가 머리를 부빈다. 두 고양이는 한참을 바라보다 함께 사라진다. 나비와의 작별.</p>
+      <div class="chips"><span class="chip citem">아이템: [나비의 발자국] — 어떤 잠입 이벤트든 1회 자동 성공</span><span class="chip cpen">나비 이탈 (좋은 이유)</span></div>
+      <p class="cnote">나비를 보내주는 선택. 이후 나비 관련 패시브는 소멸하지만 아이템이 그 마지막 흔적으로 남는다.</p>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="lock">나비 동반 필요</span><span class="cl-label">B. 나비를 안고 도망친다</span></div>
+      <p class="ct">나비가 잠시 저항하다 세라 품에 안긴다. 거대 고양이는 멀리서 오래 바라보다 돌아선다.</p>
+      <div class="chips"><span class="chip csv">SV +3</span><span class="chip cmt">멘탈 +5</span><span class="chip cpen">나비 호감도 -1</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="cl-label">C. 그냥 도망친다</span></div>
+      <p class="ct">나비 없이 혼자 뛴다. 거대 고양이가 쫓아오다 멈춘다.</p>
+      <div class="chips"><span class="chip cpen">멘탈 -8</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P1-06</span><span class="ev-name">폐허의 라디오</span>
+    <div class="ev-badges"><span class="badge b-rnd">랜덤</span><span class="badge b-main">영원한 밤구역</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">암흑 속에서 지직거리는 라디오 소리가 난다. 어딘가에서 누군가가 생방송을 하고 있다. 주파수를 맞추면 목소리가 들린다. "2026년에 답이 있습니다."</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">RFID 자원순환 태그 필요</span><span class="cl-label">A. 태그로 라디오 신호 출처를 추적한다</span></div>
+      <p class="ct">전파 패턴을 분석해 발신지를 특정한다. 누군가 오래전부터 이 신호를 송출하고 있었다는 것을 알게 된다.</p>
+      <div class="chips"><span class="chip csv">SV +10</span><span class="chip citem">아이템: [주파수 노트] — Phase 2에서 오병철 첫 등장 시 정체 1단계 조기 해금</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="cl-label">B. 끝까지 듣는다</span></div>
+      <p class="ct">방송은 20분 후 끊긴다. 마지막 말: "기억하는 사람이 역사를 바꿉니다."</p>
+      <div class="chips"><span class="chip csv">SV +5</span><span class="chip cmt">멘탈 +10</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="cl-label">C. 무시하고 지나친다</span></div>
+      <div class="chips"><span class="chip cpen">SV -2</span></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end p1 -->
+
+<!-- ========== PHASE 2-A ========== -->
+<div id="p2a" class="phase">
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2A-01</span><span class="ev-name">폐지 줍는 어르신</span>
+    <div class="ev-badges"><span class="badge b-rnd">랜덤</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">새벽 골목, 리어카 한쪽 바퀴가 빠진 채 폐지를 수거하는 70대 어르신. "이게 다 무슨 소용인가" 혼잣말을 한다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">옥순 동반 필요</span><span class="cl-label">A. 옥순 할머니가 아는 매칭 플랫폼에 연결해 드린다</span></div>
+      <p class="ct">옥순이 아는 어르신 고용 협동조합에 연결. 어르신이 정기 수거 파트너가 된다.</p>
+      <div class="chips"><span class="chip csv">SV +15</span><span class="chip cmoney">자금 +5</span><span class="chip cfood">식량 +3</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="cl-label">B. 리어카를 직접 고쳐드린다</span></div>
+      <div class="chips"><span class="chip csv">SV +7</span><span class="chip cmt">멘탈 +6</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="cl-label">C. 현금을 드린다</span></div>
+      <div class="chips"><span class="chip csv">SV +3</span><span class="chip cpen">자금 -5</span></div>
+    </div>
+    <div class="choice cd">
+      <div class="ch"><span class="cl-label">D. 그냥 지나친다</span></div>
+      <div class="chips"><span class="chip cpen">SV -5</span><span class="chip cpen">멘탈 -5</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2A-02</span><span class="ev-name">부당해고 노동자</span>
+    <div class="ev-badges"><span class="badge b-rnd">랜덤</span><span class="badge b-comp">지호 영입 조건 1/2</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">편의점 앞에서 해고 통보서를 들고 망연자실한 청년. 계약서를 들여다보니 불법 조항이 있다. 사장은 이미 문을 닫았다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">지호 동반 필요</span><span class="cl-label">A. 지호가 계약서를 검토하고 소액심판을 신청한다</span></div>
+      <div class="chips"><span class="chip csv">SV +18</span><span class="chip cmoney">자금 +8 (2턴 후 회수)</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="cl-label">B. 노동부 신고 방법을 알려준다</span></div>
+      <div class="chips"><span class="chip csv">SV +8</span></div>
+      <p class="cnote">B 이상 선택 시 지호 영입 조건 1/2 달성</p>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="cl-label">C. 위로의 말만 건넨다</span></div>
+      <div class="chips"><span class="chip csv">SV +2</span><span class="chip cmt">멘탈 +3</span></div>
+    </div>
+    <div class="choice cd">
+      <div class="ch"><span class="cl-label">D. 어쩔 수 없다고 한다</span></div>
+      <div class="chips"><span class="chip cpen">SV -5</span><span class="chip cpen">멘탈 -8</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2A-03</span><span class="ev-name">재개발 위기 마을</span>
+    <div class="ev-badges"><span class="badge b-rnd">랜덤</span><span class="badge b-comp">옥순 영입 조건</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">강태수건설 현수막이 걸린 골목. 주민들이 강제 이주 통보를 받았다. 이장 어르신이 홀로 항의하고 있고 나머지는 포기한 눈빛이다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">옥순 동반 필요</span><span class="cl-label">A. 옥순 할머니가 주민들을 모아 반상회를 연다</span></div>
+      <p class="ct">옥순이 골목을 돌며 문을 두드린다. 30분 만에 주민 열두 명이 모인다.</p>
+      <div class="chips"><span class="chip csv">SV +14</span><span class="chip cmoney">자금 +5</span><span class="chip cstory">강태수건설 내부 메모 입수 (증거 1단계)</span><span class="chip cpen">수사망 +1 위험</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="lock">소연 동반 필요</span><span class="cl-label">B. 소연이 현장을 생중계한다</span></div>
+      <div class="chips"><span class="chip csv">SV +16</span><span class="chip cstory">수사망 진척 1회 차단</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="cl-label">C. 항의 서명을 모은다</span></div>
+      <div class="chips"><span class="chip csv">SV +8</span></div>
+      <p class="cnote">C 이상 선택 시 옥순 영입 조건 달성 + 옥순과 첫 대화 이벤트 발생</p>
+    </div>
+    <div class="choice cd">
+      <div class="ch"><span class="cl-label">D. 보상금 받고 이사 가는 게 낫다고 한다</span></div>
+      <div class="chips"><span class="chip cpen">SV -8</span><span class="chip cpen">멘탈 -5</span><span class="chip cpen">옥순 영입 불가 (이번 회차)</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2A-04</span><span class="ev-name">가짜 뉴스 유포자</span>
+    <div class="ev-badges"><span class="badge b-rnd">랜덤</span><span class="badge b-comp">소연 영입 조건</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">강태수건설이 유포한 허위 보도자료가 지역 커뮤니티에 퍼지고 있다. 주민들이 잘못된 정보로 자진 이주를 고민 중이다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">소연 동반 필요</span><span class="cl-label">A. 소연이 팩트체크 기사를 낸다</span></div>
+      <div class="chips"><span class="chip csv">SV +16</span><span class="chip cstory">수사망 진척 1회 차단</span><span class="chip cstory">소연: 강태수건설 보도자료 원본 입수</span></div>
+      <p class="cnote">A 선택 시 소연 영입 조건 달성</p>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="cl-label">B. 커뮤니티에 직접 반박글을 올린다</span></div>
+      <div class="chips"><span class="chip csv">SV +7</span></div>
+      <p class="cnote">B 선택 시도 소연 영입 조건 달성 (단, 소연 신뢰도 낮게 시작)</p>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="cl-label">C. 무시한다</span></div>
+      <div class="chips"><span class="chip cpen">SV -3</span><span class="chip cstory">수사망 +1</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2A-05</span><span class="ev-name">유기동물 단속반</span>
+    <div class="ev-badges"><span class="badge b-rnd">랜덤</span><span class="badge b-comp">나비 이탈 이벤트 (나쁜 이유)</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">시 단속반이 유기동물을 포획하고 있다. 나비를 발견하고 다가온다. "미등록 동물은 신고 의무입니다." 자금 인센티브를 제시한다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">나비 동반 필요</span><span class="cl-label">A. 나비가 내 반려동물이라고 주장한다</span></div>
+      <div class="chips"><span class="chip csv">SV +5</span><span class="chip cmt">멘탈 +5</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="lock">나비 동반 필요</span><span class="cl-label">B. 단속반에 나비를 넘긴다 (자금 +8 유혹)</span></div>
+      <div class="chips"><span class="chip cmoney">자금 +8</span><span class="chip cpen">SV -20</span><span class="chip cpen">멘탈 -15</span><span class="chip cpen">나비 이탈 (나쁜 이유)</span><span class="chip cpen">이후 모든 이벤트 "배신자" 꼬리표 — 특정 선택지 비용 +5</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="cl-label">C. 나비 없이 모른 척 지나간다</span></div>
+      <div class="chips"><span class="chip cpen">멘탈 -5</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2A-06</span><span class="ev-name">민준과의 첫 대화</span>
+    <div class="ev-badges"><span class="badge b-main">메인 스토리</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">강태수건설 앞 버스정류장. 민준이 서류 뭉치를 안고 버스를 기다린다. 세라가 처음으로 그를 가까이서 본다. 아버지다. 그런데 자신보다 어리다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">루카 동반 필요</span><span class="cl-label">A. 루카가 민준의 진심을 먼저 읽는다</span></div>
+      <p class="ct">루카: "저 사람, 무서워하고 있어요. 근데 포기는 안 했어요."</p>
+      <div class="chips"><span class="chip csv">SV +8</span><span class="chip cstory">민준 관계도 +2 (빠른 신뢰 구축)</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="cl-label">B. 말을 걸어본다 — "힘들어 보이세요"</span></div>
+      <div class="chips"><span class="chip csv">SV +5</span><span class="chip cstory">민준 관계도 +1</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="cl-label">C. 그냥 지켜본다</span></div>
+      <div class="chips"><span class="chip cstory">민준 관계도 변화 없음</span><span class="chip cmt">멘탈 -3 (감정 억제)</span></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end p2a -->
+
+<!-- ========== PHASE 2-B ========== -->
+<div id="p2b" class="phase">
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2B-01</span><span class="ev-name">기업 문서 입수</span>
+    <div class="ev-badges"><span class="badge b-main">메인 스토리</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">민준이 몰래 복사해둔 서류 뭉치. 환경영향평가 원본과 제출본이 다르다. 세라는 이것을 어떻게 활용할지 결정해야 한다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">지호 동반 필요</span><span class="cl-label">A. 지호가 불법 조항을 짚어낸다</span></div>
+      <div class="chips"><span class="chip cstory">증거 등급 1→2</span><span class="chip csv">SV +10</span><span class="chip cstory">3층 반전 해금: 비상금 계좌의 실체 공개</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="lock">재민 동반 필요</span><span class="cl-label">B. 재민이 자금 흐름을 역추적한다</span></div>
+      <div class="chips"><span class="chip cstory">증거 등급 1→2 (다른 경로)</span><span class="chip cpen">자금 -5 (조사 비용)</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="cl-label">C. 민준에게 직접 물어본다</span></div>
+      <div class="chips"><span class="chip cmt">멘탈 +5</span><span class="chip cstory">민준 관계도 +1</span><span class="chip cstory">증거 등급 유지 (1단계)</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2B-02</span><span class="ev-name">임금체불 사장</span>
+    <div class="ev-badges"><span class="badge b-rnd">랜덤</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">동네 식당 주인이 알바생 3개월치 급여를 떼먹고 폐업을 준비 중. 알바생들이 입구를 막고 있다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">지호 + 재민 동반 필요</span><span class="cl-label">A. 지호가 소송, 재민이 피해액 크라우드펀딩을 동시에 진행한다</span></div>
+      <p class="ct">법적 압박과 여론 압박을 동시에. 사장이 이틀 만에 전액 지급한다.</p>
+      <div class="chips"><span class="chip csv">SV +20</span><span class="chip cmoney">자금 +12</span><span class="chip citem">아이템: [연대 서명서] — 이후 주민 관련 이벤트 SV +5 보너스</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="lock">지호 동반 필요</span><span class="cl-label">B. 지호가 소액심판을 신청한다</span></div>
+      <div class="chips"><span class="chip csv">SV +15</span><span class="chip cmoney">자금 +8 (3턴 후 회수)</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="lock">소연 동반 필요</span><span class="cl-label">C. 소연이 기사를 낸다</span></div>
+      <div class="chips"><span class="chip csv">SV +13</span><span class="chip cstory">오병철 수사망 진척 1회 차단</span></div>
+    </div>
+    <div class="choice cd">
+      <div class="ch"><span class="lock">재민 동반 필요</span><span class="cl-label">D. 재민이 긴급 펀딩을 연다</span></div>
+      <div class="chips"><span class="chip csv">SV +10</span><span class="chip cmoney">자금 +15 또는 자금 -5 (랜덤)</span></div>
+    </div>
+    <div class="choice ce">
+      <div class="ch"><span class="cl-label">E. 양쪽 다 사정이 있다며 넘어간다</span></div>
+      <div class="chips"><span class="chip cpen">SV -8</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2B-03</span><span class="ev-name">자금난 소셜벤처 — 법인 설립</span>
+    <div class="ev-badges"><span class="badge b-rnd">랜덤</span><span class="badge b-comp">지호+재민 콤보</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">장애인 고용 카페를 운영하는 사장이 임대료를 못 내 폐업 위기. 직원 7명이 일자리를 잃을 처지다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">지호 + 재민 동반 + SV 40 이상 필요</span><span class="cl-label">A. 지호와 재민이 소셜벤처 법인화를 돕는다</span></div>
+      <div class="chips"><span class="chip csv">SV +20</span><span class="chip cmoney">자금 +10</span><span class="chip citem">아이템: [법인 설립 인장] — 이후 계약·협상 이벤트 자동 성공 1회</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="lock">재민 동반 필요</span><span class="cl-label">B. 재민이 긴급 펀딩을 연다</span></div>
+      <div class="chips"><span class="chip csv">SV +12</span><span class="chip cmoney">자금 +15</span><span class="chip cpen">다음 턴 SV 획득 -5</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="cl-label">C. 현금을 기부한다</span></div>
+      <div class="chips"><span class="chip csv">SV +5</span><span class="chip cpen">자금 -10</span></div>
+    </div>
+    <div class="choice cd">
+      <div class="ch"><span class="cl-label">D. 넘어간다</span></div>
+      <div class="chips"><span class="chip cpen">SV -7</span><span class="chip cpen">멘탈 -5</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2B-04</span><span class="ev-name">소연의 정체 발각</span>
+    <div class="ev-badges"><span class="badge b-main">메인 스토리</span><span class="badge b-comp">소연 보유 시 발생</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">소연이 오래된 사진과 세라의 얼굴을 번갈아 보며 묻는다. "혹시 강민준 씨 딸이야?" 세라는 선택해야 한다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">루카 동반 필요</span><span class="cl-label">A. 루카가 소연의 진심을 먼저 읽고, 사실대로 말한다</span></div>
+      <p class="ct">루카: "믿어도 돼요." 세라가 모든 것을 털어놓는다.</p>
+      <div class="chips"><span class="chip cstory">4층 반전 해금: 소연 어머니의 진실 즉시 공개</span><span class="chip ccomp">소연 신뢰도 최대</span><span class="chip csv">SV +10</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="cl-label">B. 사실대로 말한다</span></div>
+      <div class="chips"><span class="chip cstory">4층 반전 해금 (루카 없이는 2이벤트 후)</span><span class="chip ccomp">소연 신뢰도 +2</span><span class="chip cpen">멘탈 -5</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="cl-label">C. 부정한다</span></div>
+      <div class="chips"><span class="chip cstory">4층 반전 지연 (3이벤트 후 재등장)</span><span class="chip cpen">소연 신뢰도 -1</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2B-05</span><span class="ev-name">오병철의 접근</span>
+    <div class="ev-badges"><span class="badge b-main">메인 스토리</span><span class="badge b-boss">오병철 등장</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">카페에서 낯선 중년 남성이 세라 맞은편에 앉는다. "민준 씨 주변에서 자주 보이던데요." 정체를 모른다. 위협인지 협박인지 알 수 없다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">루카 동반 필요</span><span class="cl-label">A. 루카가 오병철의 진심을 읽는다</span></div>
+      <p class="ct">루카: "저 사람… 회장님한테도 숨기는 게 있어요."</p>
+      <div class="chips"><span class="chip cstory">오병철 정체 1단계 조기 해금</span><span class="chip csv">SV +8</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="lock">소연 동반 필요</span><span class="cl-label">B. 소연이 오병철을 몰래 촬영하고 신원을 조회한다</span></div>
+      <div class="chips"><span class="chip cstory">오병철 = 강태수건설 법무팀장 확인</span><span class="chip cstory">오병철 정체 1단계 해금</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="lock">[주파수 노트] 아이템 보유 필요</span><span class="cl-label">C. 주파수 노트와 오병철의 말투를 대조한다</span></div>
+      <p class="ct">라디오 방송의 발신자와 동일 인물임을 직감한다.</p>
+      <div class="chips"><span class="chip cstory">오병철 정체 2단계 직접 해금</span><span class="chip citem">[주파수 노트] 소모</span></div>
+    </div>
+    <div class="choice cd">
+      <div class="ch"><span class="cl-label">D. 모른 척 자리를 뜬다</span></div>
+      <div class="chips"><span class="chip cpen">수사망 +1</span><span class="chip cmt">멘탈 -5</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2B-06</span><span class="ev-name">루카의 이탈 — 미래로 돌아가는 문</span>
+    <div class="ev-badges"><span class="badge b-main">메인 스토리</span><span class="badge b-comp">루카 이탈 이벤트</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">2050년으로 돌아가는 시간 균열이 잠시 열린다. 루카가 세라를 바라본다. "나, 여기 있어도 될까요?" 루카도 2050년 출신이다. 돌아갈 수 있다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="cl-label">A. 루카를 먼저 돌려보낸다</span></div>
+      <p class="ct">좋은 이유의 이탈. 루카가 세라의 손을 잠깐 잡았다가 놓는다.</p>
+      <div class="chips"><span class="chip citem">아이템: [루카의 레시피] — 1회용, 멘탈 +30 즉시 회복</span><span class="chip cpen">루카 이탈 (좋은 이유)</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="cl-label">B. 같이 있자고 한다</span></div>
+      <div class="chips"><span class="chip cstory">루카 유지</span><span class="chip cmt">멘탈 +10</span></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end p2b -->
+
+<!-- ========== PHASE 2-C ========== -->
+<div id="p2c" class="phase">
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2C-01</span><span class="ev-name">할아버지 수사망 진척</span>
+    <div class="ev-badges"><span class="badge b-rnd">랜덤</span><span class="badge b-boss">오병철 추적</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">오병철이 세라의 동선을 파악했다. 편의점 CCTV에 세라 얼굴이 찍혔다는 제보. 다음 이동이 위험하다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">소연 동반 필요</span><span class="cl-label">A. 소연이 역취재로 여론을 돌린다</span></div>
+      <div class="chips"><span class="chip cstory">수사망 +1 무효화</span><span class="chip csv">SV +5</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="lock">나비 동반 필요</span><span class="cl-label">B. 나비를 들여보내 CCTV 영상을 지운다</span></div>
+      <div class="chips"><span class="chip cstory">수사망 +1 무효화</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="lock">[나비의 발자국] 아이템 보유 필요</span><span class="cl-label">C. 나비의 발자국 아이템으로 잠입 자동 성공</span></div>
+      <div class="chips"><span class="chip cstory">수사망 +1 무효화</span><span class="chip citem">[나비의 발자국] 소모</span></div>
+    </div>
+    <div class="choice cd">
+      <div class="ch"><span class="cl-label">D. 1턴 은신한다</span></div>
+      <div class="chips"><span class="chip cstory">수사망 유지</span><span class="chip cpen">1턴 이벤트 스킵</span></div>
+    </div>
+    <div class="choice ce">
+      <div class="ch"><span class="cl-label">E. 무시하고 계속 움직인다</span></div>
+      <div class="chips"><span class="chip cpen">수사망 +1 누적</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2C-02</span><span class="ev-name">재민의 자금 추적 — 2040의 진실</span>
+    <div class="ev-badges"><span class="badge b-main">메인 스토리 · 핵심 반전</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">재민이 자금 흐름을 역추적해 2040년 3월 11일 관련 계좌를 찾아낸다. 강태수건설 회장 계좌가 아니다 — 오병철 개인 법인 계좌에서 '처리비' 명목의 거액이 이동했다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">루카 + 재민 동반 필요</span><span class="cl-label">A. 루카가 민준의 반응을 읽으며, 사실을 함께 알린다</span></div>
+      <p class="ct">루카: "민준 씨, 이미 알고 있었어요." 민준이 고개를 끄덕인다. 세 사람이 침묵 속에 있다.</p>
+      <div class="chips"><span class="chip cstory">5층 반전 완전 해금: 앱의 기원 공개</span><span class="chip csv">SV +15</span><span class="chip cmt">멘탈 -5</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="lock">재민 동반 필요</span><span class="cl-label">B. 민준에게 사실을 알린다</span></div>
+      <div class="chips"><span class="chip cstory">5층 반전 해금</span><span class="chip csv">SV +8</span><span class="chip cpen">멘탈 -10</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="cl-label">C. 혼자 알고 있는다</span></div>
+      <div class="chips"><span class="chip cstory">반전 클라이맥스에서 강제 공개</span><span class="chip cpen">멘탈 -5/턴 (혼자 감당)</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2C-03</span><span class="ev-name">기자회견장 — 최종 선택</span>
+    <div class="ev-badges"><span class="badge b-main">클라이맥스</span><span class="badge b-boss">엔딩 분기 결정</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">기자회견장. 세 가지 진실이 동시에 터진다. 환경 데이터 조작(회장 지시), 2040년 교통사고(오병철 단독 기획), 그리고 회장이 이 자리에서 처음으로 아들의 죽음의 진실을 알게 된다. 민준이 세라에게 묻는다. "넌 뭘 원하니?"</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">소연 + 지호 + SV 50 이상 필요</span><span class="cl-label">A. 소연의 생방송 + 지호의 서류로 전부 공개한다</span></div>
+      <div class="chips"><span class="chip cstory">굿 엔딩 루트 확정</span><span class="chip csv">SV +20</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="lock">루카 동반 필요</span><span class="cl-label">B. 루카가 회장의 진심을 읽고, 회장에게 선택을 넘긴다</span></div>
+      <p class="ct">"할아버지가 직접 말해요." 회장이 스스로 고백하면 굿 엔딩. 침묵하면 노멀 엔딩.</p>
+      <div class="chips"><span class="chip cstory">굿 또는 노멀 엔딩 분기</span><span class="chip csv">SV +12</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="lock">소연 또는 지호 중 1명 필요</span><span class="cl-label">C. 오병철만 고발한다</span></div>
+      <div class="chips"><span class="chip cstory">노멀 엔딩 루트</span><span class="chip csv">SV +10</span></div>
+    </div>
+    <div class="choice cd">
+      <div class="ch"><span class="cl-label">D. 아무것도 공개하지 않는다</span></div>
+      <div class="chips"><span class="chip cstory">배드 엔딩 루트</span><span class="chip cpen">멘탈 -20</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2C-04</span><span class="ev-name">민준의 한마디 — 엔딩 직전</span>
+    <div class="ev-badges"><span class="badge b-main">엔딩 직전</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">모든 것이 끝난 자리. 민준이 다가온다. 세라의 기억이 희미해지고 있다. 민준은 알고 있다. 그녀가 누구인지. 세라는 점점 모르게 되어간다.</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">굿 엔딩 루트 + 민준 관계도 최대 필요</span><span class="cl-label">A. "나 사실 당신 딸이에요" — 말한다</span></div>
+      <p class="ct">민준: "알아." 그 두 글자가 전부다.</p>
+      <div class="chips"><span class="chip cstory">굿 엔딩 전용 장면 해금</span><span class="chip cmt">멘탈 +30</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="cl-label">B. 아무 말도 못 하고 그냥 웃는다</span></div>
+      <div class="chips"><span class="chip cstory">노멀/배드 엔딩 공통 장면</span><span class="chip cmt">멘탈 +10</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="cl-label">C. "잘 살아요" — 돌아선다</span></div>
+      <div class="chips"><span class="chip cstory">굿 엔딩 후일담 장면 추가 해금</span><span class="chip citem">아이템: [낡은 스마트폰] — 굿 엔딩 마지막 장면 트리거</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ev">
+  <div class="ev-h" onclick="tog(this)">
+    <span class="ev-id">P2C-05</span><span class="ev-name">사회적 임팩트 인정</span>
+    <div class="ev-badges"><span class="badge b-rnd">랜덤</span><span class="badge b-comp">재민 보유 + SV 50 이상</span></div>
+    <span class="ev-arr">▾</span>
+  </div>
+  <div class="ev-body">
+    <p class="scene">세라의 활동이 알려지면서 임팩트 투자자가 접근해온다. 재민이 흥분해서 전화를 건다. "이거 진짜 기회야."</p>
+    <p class="cl">선택지</p>
+    <div class="choice ca">
+      <div class="ch"><span class="lock">재민 동반 + SV 50 이상 필요</span><span class="cl-label">A. 재민이 임팩트 투자자를 연결한다</span></div>
+      <div class="chips"><span class="chip cmoney">자금 +20</span><span class="chip cstory">굿 엔딩 확정 플래그 ON</span></div>
+    </div>
+    <div class="choice cb">
+      <div class="ch"><span class="lock">지호 + 재민 동반 필요</span><span class="cl-label">B. 지호와 재민이 정식 소셜벤처로 법인화한다</span></div>
+      <div class="chips"><span class="chip csv">SV +15</span><span class="chip cmoney">자금 +10</span><span class="chip citem">아이템: [임팩트 투자 계약서] — 재민 이탈 방지 (자금 0 상태에서도 유지)</span></div>
+    </div>
+    <div class="choice cc">
+      <div class="ch"><span class="cl-label">C. 거절한다</span></div>
+      <div class="chips"><span class="chip cpen">재민 호감도 -1</span><span class="chip cmt">멘탈 +5</span></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end p2c -->
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.phase').forEach(p=>p.className='phase');
+  document.querySelectorAll('.tab').forEach(t=>t.className='tab');
+  document.getElementById(id).className='phase on';
+  const map={p1:0,p2a:1,p2b:2,p2c:3};
+  document.querySelectorAll('.tab')[map[id]].className='tab on';
+}
+function tog(h){
+  const b=h.nextElementSibling, a=h.querySelector('.ev-arr');
+  const o=b.classList.contains('on');
+  b.className=o?'ev-body':'ev-body on';
+  a.className=o?'ev-arr':'ev-arr on';
+}
+</script>

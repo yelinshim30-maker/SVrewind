@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REWIND2026 — 엔딩 & 진입 요건</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fdf8f2;
+  --card: #ffffff;
+  --ink: #2a2730;
+  --muted: #6b6375;
+  --border: rgba(0,0,0,0.08);
+  --sans: 'Noto Sans KR', sans-serif;
+  --hand: 'Gaegu', cursive;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+}
+
+/* ── 페이지 헤더 ── */
+.page-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.page-badge {
+  display: inline-block;
+  background: #EEEDFE;
+  color: #3C3489;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+}
+.page-title {
+  font-family: var(--hand);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+.page-title em { color: #3C3489; font-style: normal; }
+.page-sub {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 300;
+}
+
+/* ── 섹션 구분 ── */
+.sec-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 48px 0 20px;
+}
+.sec-divider .emoji { font-size: 18px; }
+.sec-divider h2 { font-size: 16px; font-weight: 700; color: var(--ink); }
+.sec-divider .line { flex: 1; height: 1px; background: var(--border); }
+
+/* ════════════════════════════════
+   PART 1 — 엔딩 진입 요건
+════════════════════════════════ */
+
+/* 단계 헤더 */
+.phase-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.phase-num {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 500; flex-shrink: 0;
+}
+.phase-title { font-size: 14px; font-weight: 700; color: var(--ink); }
+.phase-sub { font-size: 12px; color: var(--muted); margin-left: auto; }
+
+.req-section { margin-bottom: 32px; }
+
+/* SV 구간 테이블 */
+.sv-table { width: 100%; border-collapse: collapse; }
+.sv-table th {
+  font-size: 11px; font-weight: 500; color: var(--muted);
+  text-align: left; padding: 7px 12px;
+  background: #f5f0ea; border: 1px solid var(--border);
+}
+.sv-table td {
+  font-size: 12.5px; padding: 10px 12px;
+  border: 1px solid var(--border);
+  vertical-align: top; line-height: 1.6;
+  color: var(--muted);
+}
+.sv-table td:first-child { font-weight: 500; white-space: nowrap; }
+.sv-table tr.r-good td { background: #EAF3DE; }
+.sv-table tr.r-good td:first-child { color: #27500A; }
+.sv-table tr.r-normal td { background: #FAEEDA; }
+.sv-table tr.r-normal td:first-child { color: #633806; }
+.sv-table tr.r-bad td { background: #F1EFE8; }
+.sv-table tr.r-bad td:first-child { color: #444441; }
+
+/* 동료 카드 그리드 */
+.comp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+}
+.comp-card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+}
+.comp-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.comp-av {
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; flex-shrink: 0;
+}
+.comp-name { font-size: 12.5px; font-weight: 700; color: var(--ink); }
+.comp-desc { font-size: 11.5px; color: var(--muted); line-height: 1.6; margin-bottom: 6px; }
+.comp-tag {
+  display: inline-block;
+  font-size: 10px; font-weight: 500;
+  padding: 2px 8px; border-radius: 10px;
+}
+.t-must    { background: #FCEBEB; color: #791F1F; }
+.t-unlock  { background: #EEEDFE; color: #3C3489; }
+.t-boost   { background: #EAF3DE; color: #27500A; }
+.t-prevent { background: #FAEEDA; color: #633806; }
+
+/* 클라이맥스 플로우 */
+.flow { display: flex; flex-direction: column; gap: 6px; }
+.flow-row { display: flex; align-items: stretch; gap: 0; border-radius: 10px; overflow: hidden; }
+.flow-cond {
+  background: #f5f0ea;
+  border: 1px solid var(--border);
+  border-right: none;
+  border-radius: 10px 0 0 10px;
+  padding: 12px 14px;
+  min-width: 160px; flex-shrink: 0;
+}
+.flow-cond-label { font-size: 10px; font-weight: 500; color: var(--muted); margin-bottom: 3px; }
+.flow-cond-val { font-size: 12px; font-weight: 700; color: var(--ink); line-height: 1.4; }
+.flow-arrow {
+  width: 24px;
+  background: #f5f0ea;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: var(--muted); flex-shrink: 0;
+}
+.flow-choices { flex: 1; display: flex; flex-direction: column; }
+.flow-choice {
+  border: 1px solid var(--border);
+  border-left: none;
+  padding: 8px 12px;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  background: var(--card);
+}
+.flow-choice:first-child { border-radius: 0 10px 0 0; }
+.flow-choice:last-child  { border-radius: 0 0 10px 0; border-top: none; }
+.flow-choice:not(:first-child):not(:last-child) { border-top: none; }
+.flow-choice:only-child  { border-radius: 0 10px 10px 0; }
+.choice-key {
+  font-size: 10px; font-weight: 700;
+  padding: 1px 7px; border-radius: 8px;
+  background: #f5f0ea; color: var(--muted);
+  flex-shrink: 0; white-space: nowrap;
+}
+.choice-txt { font-size: 11.5px; color: var(--muted); flex: 1; line-height: 1.5; }
+.ebadge {
+  font-size: 10px; font-weight: 500;
+  padding: 2px 9px; border-radius: 10px;
+  white-space: nowrap; flex-shrink: 0;
+}
+.eb-good    { background: #EAF3DE; color: #27500A; }
+.eb-gsecret { background: #E6F1FB; color: #0C447C; }
+.eb-normal  { background: #FAEEDA; color: #633806; }
+.eb-bad     { background: #F1EFE8; color: #444441; }
+.eb-bsecret { background: #FCEBEB; color: #791F1F; }
+
+/* 시크릿 조건 테이블 */
+.secret-table { width: 100%; border-collapse: collapse; }
+.secret-table th {
+  font-size: 11px; font-weight: 500; color: var(--muted);
+  text-align: left; padding: 7px 12px;
+  background: #f5f0ea; border: 1px solid var(--border);
+}
+.secret-table td {
+  font-size: 12px; padding: 10px 12px;
+  border: 1px solid var(--border);
+  vertical-align: top; line-height: 1.7; color: var(--muted);
+}
+.secret-table td:first-child { font-weight: 700; white-space: nowrap; }
+.secret-table tr:nth-child(1) td:first-child { color: #0C447C; background: #E6F1FB; }
+.secret-table tr:nth-child(2) td:first-child { color: #791F1F; background: #FCEBEB; }
+
+/* 전체 요약 테이블 */
+.summary-table { width: 100%; border-collapse: collapse; }
+.summary-table th {
+  font-size: 11px; font-weight: 500; color: var(--muted);
+  padding: 7px 12px; background: #f5f0ea;
+  border: 1px solid var(--border); text-align: left;
+}
+.summary-table td {
+  font-size: 12px; padding: 10px 12px;
+  border: 1px solid var(--border);
+  vertical-align: top; line-height: 1.65; color: var(--muted);
+}
+.summary-table td:first-child { font-weight: 700; }
+.sr-good    td:first-child { color: #27500A; background: #EAF3DE; }
+.sr-gsecret td:first-child { color: #0C447C; background: #E6F1FB; }
+.sr-normal  td:first-child { color: #633806; background: #FAEEDA; }
+.sr-bad     td:first-child { color: #444441; background: #F1EFE8; }
+.sr-bsecret td:first-child { color: #791F1F; background: #FCEBEB; }
+
+/* 설계 의도 노트 */
+.design-note {
+  font-size: 12px; color: var(--muted);
+  line-height: 1.75; padding: 12px 16px;
+  background: #f5f0ea; border-radius: 12px;
+  margin-top: 8px;
+}
+.design-note strong { color: var(--ink); font-weight: 500; }
+
+/* ════════════════════════════════
+   PART 2 — 엔딩별 후일담 (탭)
+════════════════════════════════ */
+
+.etabs {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.etab {
+  font-size: 11.5px; font-weight: 500;
+  padding: 6px 16px; border-radius: 20px;
+  border: 1.5px solid;
+  background: var(--card);
+  cursor: pointer; transition: all .15s;
+  font-family: var(--sans);
+}
+.etab:not(.on) { opacity: 0.55; border-color: var(--border) !important; color: var(--muted) !important; }
+.etab.on { opacity: 1; }
+
+.ending { display: none; flex-direction: column; gap: 14px; }
+.ending.on { display: flex; }
+
+/* 엔딩 헤더 */
+.e-header { border-radius: 16px; padding: 20px 22px; }
+.e-title  { font-family: var(--hand); font-size: 22px; font-weight: 700; margin: 0 0 4px; }
+.e-cond   { font-size: 11.5px; margin: 0 0 10px; opacity: .85; font-weight: 300; }
+.e-scene  { font-size: 13px; line-height: 1.8; margin: 0 0 10px; font-style: italic; font-weight: 300; }
+.e-tag    { display: inline-block; font-size: 10.5px; font-weight: 500; padding: 2px 9px; border-radius: 10px; margin-right: 5px; margin-bottom: 4px; }
+
+.hd-good    { background: #EAF3DE; }
+.hd-good .e-title { color: #1A4D2A; } .hd-good .e-cond { color: #3B6D11; } .hd-good .e-scene { color: #27500A; } .hd-good .e-tag { background: #C0DD97; color: #173404; }
+
+.hd-gsecret { background: #E6F1FB; }
+.hd-gsecret .e-title { color: #0C2A52; } .hd-gsecret .e-cond { color: #185FA5; } .hd-gsecret .e-scene { color: #0C447C; } .hd-gsecret .e-tag { background: #B5D4F4; color: #042C53; }
+
+.hd-normal  { background: #FAEEDA; }
+.hd-normal .e-title { color: #3D2200; } .hd-normal .e-cond { color: #854F0B; } .hd-normal .e-scene { color: #633806; } .hd-normal .e-tag { background: #FAC775; color: #412402; }
+
+.hd-bad     { background: #F1EFE8; }
+.hd-bad .e-title { color: #2C2C2A; } .hd-bad .e-cond { color: #5F5E5A; } .hd-bad .e-scene { color: #444441; } .hd-bad .e-tag { background: #D3D1C7; color: #2C2C2A; }
+
+.hd-bsecret { background: #FCEBEB; }
+.hd-bsecret .e-title { color: #3D0A0A; } .hd-bsecret .e-cond { color: #A32D2D; } .hd-bsecret .e-scene { color: #791F1F; } .hd-bsecret .e-tag { background: #F7C1C1; color: #501313; }
+
+/* 인물 카드 그리드 */
+.chars { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 8px; }
+.char {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+.char-h { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+.av {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.char-name { font-size: 13px; font-weight: 700; color: var(--ink); margin: 0 0 1px; }
+.char-pos  { font-size: 10.5px; color: var(--muted); margin: 0; font-weight: 300; }
+.char-story { font-size: 12px; color: var(--muted); line-height: 1.75; margin: 0; font-weight: 300; }
+
+/* 시크릿 노트 박스 */
+.secret-note {
+  background: #f5f0ea;
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.secret-note .secret-label {
+  font-size: 10.5px; font-weight: 700;
+  letter-spacing: .05em; color: var(--muted);
+  margin-bottom: 5px; text-transform: uppercase;
+  display: block;
+}
+.secret-note p { font-size: 12.5px; color: var(--muted); line-height: 1.75; font-weight: 300; }
+
+/* ── 구분선 ── */
+.big-divider {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 52px 0;
+}
+
+/* ── 푸터 ── */
+.page-footer {
+  margin-top: 52px;
+  text-align: center;
+  font-size: 12px; color: var(--muted); font-weight: 300;
+  line-height: 1.8;
+}
+.page-footer strong {
+  font-family: var(--hand); font-size: 16px;
+  color: var(--ink); font-weight: 700;
+  display: block; margin-bottom: 4px;
+}
+</style>
+</head>
+<body>
+
+<!-- ── 페이지 헤더 ── -->
+<header class="page-header">
+  <div class="page-badge">🎮 REWIND2026: Social Connect</div>
+  <h1 class="page-title">엔딩 가이드 &amp; <em>후일담</em></h1>
+  <p class="page-sub">진입 요건 설계 + 엔딩별 캐릭터 후일담</p>
+</header>
+
+<!-- ════════════════════════════
+  PART 1 — 엔딩 진입 요건
+════════════════════════════ -->
+<div class="sec-divider">
+  <span class="emoji">📋</span>
+  <h2>엔딩 진입 요건</h2>
+  <div class="line"></div>
+</div>
+
+<!-- 1단계: SV 구간 -->
+<div class="req-section">
+  <div class="phase-header">
+    <div class="phase-num" style="background:#EAF3DE;color:#27500A;">1</div>
+    <span class="phase-title">SV 구간 — 진입 가능한 엔딩 풀 결정</span>
+    <span class="phase-sub">게임 전반에 걸쳐 누적</span>
+  </div>
+  <table class="sv-table">
+    <thead>
+      <tr><th>SV 구간</th><th>진입 가능 엔딩</th><th>비고</th></tr>
+    </thead>
+    <tbody>
+      <tr class="r-good">
+        <td>SV 55 이상</td>
+        <td>굿 엔딩 / 굿 시크릿 엔딩 진입 가능</td>
+        <td>동료 조합 조건을 추가로 충족해야 확정</td>
+      </tr>
+      <tr class="r-good">
+        <td>SV 40~54</td>
+        <td>굿 엔딩 진입 가능 (시크릿 불가)</td>
+        <td>소연·지호 동반 시 굿, 루카 동반 시 굿 또는 노멀</td>
+      </tr>
+      <tr class="r-normal">
+        <td>SV 25~39</td>
+        <td>노멀 엔딩만 진입 가능</td>
+        <td>클라이맥스 선택과 무관하게 굿 엔딩 차단</td>
+      </tr>
+      <tr class="r-bad">
+        <td>SV 24 이하</td>
+        <td>배드 엔딩 / 배드 시크릿 엔딩</td>
+        <td>배드 시크릿은 클라이맥스 이후 특정 행동 필요</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 2단계: 동료 조합 -->
+<div class="req-section">
+  <div class="phase-header">
+    <div class="phase-num" style="background:#EEEDFE;color:#3C3489;">2</div>
+    <span class="phase-title">동료 보유 조합 — 엔딩 풀을 추가 필터링</span>
+    <span class="phase-sub">클라이맥스 진입 시점 기준</span>
+  </div>
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-head"><div class="comp-av" style="background:#FAEEDA;">📡</div><span class="comp-name">소연</span></div>
+      <p class="comp-desc">굿 엔딩 클라이맥스 선택지 A(전부 공개) 해금. 미보유 시 A 차단.</p>
+      <span class="comp-tag t-must">굿 엔딩 필수</span>
+    </div>
+    <div class="comp-card">
+      <div class="comp-head"><div class="comp-av" style="background:#EEEDFE;">⚖️</div><span class="comp-name">지호</span></div>
+      <p class="comp-desc">굿 엔딩 클라이맥스 선택지 A(전부 공개) 해금. 소연과 동시 필요.</p>
+      <span class="comp-tag t-must">굿 엔딩 필수</span>
+    </div>
+    <div class="comp-card">
+      <div class="comp-head"><div class="comp-av" style="background:#EAF3DE;">♿</div><span class="comp-name">루카</span></div>
+      <p class="comp-desc">클라이맥스 선택지 B(회장에게 넘기기) 해금. 굿·노멀 분기 결정권.</p>
+      <span class="comp-tag t-unlock">분기 확장</span>
+    </div>
+    <div class="comp-card">
+      <div class="comp-head"><div class="comp-av" style="background:#FAECE7;">💸</div><span class="comp-name">재민</span></div>
+      <p class="comp-desc">굿 시크릿 조건 중 하나. SV 55+ 구간에서 "임팩트 투자" 이벤트 해금.</p>
+      <span class="comp-tag t-unlock">시크릿 조건</span>
+    </div>
+    <div class="comp-card">
+      <div class="comp-head"><div class="comp-av" style="background:#E6F1FB;">🐱</div><span class="comp-name">나비</span></div>
+      <p class="comp-desc">수사망 누적 억제. 나비 없이 수사망 MAX 도달 시 SV 페널티 → 배드 엔딩 유도.</p>
+      <span class="comp-tag t-prevent">배드 엔딩 방지</span>
+    </div>
+    <div class="comp-card">
+      <div class="comp-head"><div class="comp-av" style="background:#E1F5EE;">🌱</div><span class="comp-name">옥순</span></div>
+      <p class="comp-desc">공동체 이벤트 SV 보너스로 SV 구간 진입 보조. 직접 엔딩 조건은 아님.</p>
+      <span class="comp-tag t-boost">SV 보조</span>
+    </div>
+  </div>
+</div>
+
+<!-- 3단계: 클라이맥스 플로우 -->
+<div class="req-section">
+  <div class="phase-header">
+    <div class="phase-num" style="background:#FAEEDA;color:#633806;">3</div>
+    <span class="phase-title">클라이맥스 선택 — 풀 안에서 엔딩 최종 확정</span>
+    <span class="phase-sub">SV+동료가 만든 풀 내에서만 유효</span>
+  </div>
+  <div class="flow">
+
+    <div class="flow-row">
+      <div class="flow-cond">
+        <p class="flow-cond-label">SV 55↑ 풀</p>
+        <p class="flow-cond-val">굿 / 굿시크릿<br>진입 가능 구간</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-choices">
+        <div class="flow-choice">
+          <span class="choice-key">A</span>
+          <span class="choice-txt">전부 공개 (소연+지호 필수)</span>
+          <span class="ebadge eb-good">굿 엔딩</span>
+        </div>
+        <div class="flow-choice">
+          <span class="choice-key">A+★</span>
+          <span class="choice-txt">전부 공개 + 민준 관계도 MAX + [낡은 스마트폰] + 재민 보유</span>
+          <span class="ebadge eb-gsecret">굿 시크릿</span>
+        </div>
+        <div class="flow-choice">
+          <span class="choice-key">B</span>
+          <span class="choice-txt">회장에게 넘기기 (루카 필수) → 회장 고백</span>
+          <span class="ebadge eb-good">굿 엔딩</span>
+        </div>
+        <div class="flow-choice">
+          <span class="choice-key">C</span>
+          <span class="choice-txt">오병철만 고발</span>
+          <span class="ebadge eb-normal">노멀 엔딩</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-row">
+      <div class="flow-cond">
+        <p class="flow-cond-label">SV 40~54 풀</p>
+        <p class="flow-cond-val">굿 (시크릿 불가)<br>진입 가능 구간</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-choices">
+        <div class="flow-choice">
+          <span class="choice-key">A</span>
+          <span class="choice-txt">전부 공개 (소연+지호 필수)</span>
+          <span class="ebadge eb-good">굿 엔딩</span>
+        </div>
+        <div class="flow-choice">
+          <span class="choice-key">B</span>
+          <span class="choice-txt">회장에게 넘기기 → 회장 고백 시</span>
+          <span class="ebadge eb-good">굿 엔딩</span>
+        </div>
+        <div class="flow-choice">
+          <span class="choice-key">B</span>
+          <span class="choice-txt">회장에게 넘기기 → 회장 침묵 시</span>
+          <span class="ebadge eb-normal">노멀 엔딩</span>
+        </div>
+        <div class="flow-choice">
+          <span class="choice-key">C / D</span>
+          <span class="choice-txt">오병철만 고발 / 침묵</span>
+          <span class="ebadge eb-normal">노멀 엔딩</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-row">
+      <div class="flow-cond">
+        <p class="flow-cond-label">SV 25~39 풀</p>
+        <p class="flow-cond-val">노멀만<br>진입 가능 구간</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-choices">
+        <div class="flow-choice">
+          <span class="choice-key">A / B / C</span>
+          <span class="choice-txt">어떤 선택을 해도 굿 엔딩 차단</span>
+          <span class="ebadge eb-normal">노멀 엔딩</span>
+        </div>
+        <div class="flow-choice">
+          <span class="choice-key">D</span>
+          <span class="choice-txt">침묵 선택</span>
+          <span class="ebadge eb-bad">배드 엔딩</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-row">
+      <div class="flow-cond">
+        <p class="flow-cond-label">SV 24↓ 풀</p>
+        <p class="flow-cond-val">배드 / 배드시크릿<br>진입 구간</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-choices">
+        <div class="flow-choice">
+          <span class="choice-key">A / B / C</span>
+          <span class="choice-txt">공개 시도하지만 증거력 부족으로 묻힘</span>
+          <span class="ebadge eb-bad">배드 엔딩</span>
+        </div>
+        <div class="flow-choice">
+          <span class="choice-key">D + ★</span>
+          <span class="choice-txt">침묵 후 스마트폰 충전 시도 (특정 입력)</span>
+          <span class="ebadge eb-bsecret">배드 시크릿</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 시크릿 조건 -->
+<div class="req-section">
+  <div class="phase-header">
+    <div class="phase-num" style="background:#E6F1FB;color:#0C447C;">★</div>
+    <span class="phase-title">시크릿 엔딩 상세 조건</span>
+  </div>
+  <table class="secret-table">
+    <thead>
+      <tr><th>시크릿 엔딩</th><th>필수 조건</th><th>트리거</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>굿 시크릿<br>"루프의 끝"</td>
+        <td>① SV 55 이상<br>② 소연 + 지호 + 루카 + 재민 4명 동반<br>③ 민준 관계도 MAX (대화 이벤트 전부 최선 선택)<br>④ [낡은 스마트폰] 아이템 보유<br>⑤ P2C-04에서 선택지 C("잘 살아요") 선택</td>
+        <td>굿 엔딩 장면에서 아버지가 스마트폰을 건네는 순간 세라가 앱을 누름 → 루프 재시작 화면</td>
+      </tr>
+      <tr>
+        <td>배드 시크릿<br>"배터리를 충전하면"</td>
+        <td>① SV 24 이하<br>② 배드 엔딩 도달<br>③ 엔딩 화면에서 "스마트폰 충전" 특정 입력</td>
+        <td>꺼진 스마트폰 충전 → 앱 재기동 → 루프 재시작 화면 (굿 시크릿과 동일 텍스트, 다른 분위기)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 전체 요약 -->
+<div class="req-section">
+  <div class="phase-header">
+    <div class="phase-num" style="background:#F1EFE8;color:#444441;">∑</div>
+    <span class="phase-title">엔딩별 진입 요건 전체 요약</span>
+  </div>
+  <table class="summary-table">
+    <thead>
+      <tr><th>엔딩</th><th>SV 조건</th><th>동료 조건</th><th>클라이맥스 선택</th><th>추가 조건</th></tr>
+    </thead>
+    <tbody>
+      <tr class="sr-good">
+        <td>굿 엔딩</td>
+        <td>40 이상</td>
+        <td>소연 + 지호 (A 루트)<br>또는 루카 (B 루트)</td>
+        <td>A 또는 B(고백)</td>
+        <td>없음</td>
+      </tr>
+      <tr class="sr-gsecret">
+        <td>굿 시크릿</td>
+        <td>55 이상</td>
+        <td>소연+지호+루카+재민</td>
+        <td>A</td>
+        <td>민준 관계도 MAX<br>[낡은 스마트폰] 보유<br>P2C-04에서 C 선택</td>
+      </tr>
+      <tr class="sr-normal">
+        <td>노멀 엔딩</td>
+        <td>25 이상</td>
+        <td>소연 또는 지호 중 1명<br>(둘 다 없어도 가능)</td>
+        <td>B(침묵) 또는 C<br>또는 SV 부족으로 자동</td>
+        <td>없음</td>
+      </tr>
+      <tr class="sr-bad">
+        <td>배드 엔딩</td>
+        <td>24 이하 또는 D 선택</td>
+        <td>조건 없음</td>
+        <td>D 또는 자동 배드</td>
+        <td>없음</td>
+      </tr>
+      <tr class="sr-bsecret">
+        <td>배드 시크릿</td>
+        <td>24 이하</td>
+        <td>조건 없음</td>
+        <td>D 또는 자동 배드</td>
+        <td>엔딩 화면에서<br>스마트폰 충전 입력</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="design-note">💡 <strong>설계 의도</strong> — SV는 플레이어가 얼마나 사회적 임팩트를 만들었는지를 나타내고, 동료 조합은 어떤 방식으로 싸웠는지를 나타낸다. SV가 높아도 동료 없이는 굿 엔딩에 진입할 수 없고, 동료가 있어도 SV가 낮으면 노멀 이상 진입이 막힌다. 두 축이 모두 충족될 때만 최선의 결말에 도달한다.</p>
+</div>
+
+<!-- ════════════════════════════
+  구분선
+════════════════════════════ -->
+<hr class="big-divider">
+
+<!-- ════════════════════════════
+  PART 2 — 엔딩별 후일담 (탭)
+════════════════════════════ -->
+<div class="sec-divider">
+  <span class="emoji">📖</span>
+  <h2>엔딩별 후일담</h2>
+  <div class="line"></div>
+</div>
+
+<div class="etabs">
+  <button class="etab on"  style="border-color:#3B6D11;color:#27500A;" onclick="showEnding('good')">✅ 굿 엔딩</button>
+  <button class="etab"     style="border-color:#185FA5;color:#0C447C;" onclick="showEnding('gsecret')">🔵 굿 시크릿</button>
+  <button class="etab"     style="border-color:#854F0B;color:#633806;" onclick="showEnding('normal')">🌤 노멀 엔딩</button>
+  <button class="etab"     style="border-color:#5F5E5A;color:#444441;" onclick="showEnding('bad')">☁️ 배드 엔딩</button>
+  <button class="etab"     style="border-color:#A32D2D;color:#791F1F;" onclick="showEnding('bsecret')">🔴 배드 시크릿</button>
+</div>
+
+<!-- 굿 엔딩 -->
+<div id="good" class="ending on">
+  <div class="e-header hd-good">
+    <p class="e-title">기억하는 사람</p>
+    <p class="e-cond">달성 조건 — SV 40 이상 · 소연 + 지호 보유 · 클라이맥스 A(전부 공개) 또는 B(루카+회장 고백)</p>
+    <span class="e-tag">역사 변경</span><span class="e-tag">아버지 생존</span><span class="e-tag">기억 소멸</span>
+    <p class="e-scene">증거가 공개됐다. 강태수는 기소됐고 오병철은 구속됐다. 역사가 바뀌었다. 2050년, 세라는 아버지의 죽음을 모른다. 기억이 없으니까. 어느 날 아버지가 낡은 스마트폰을 건넨다. "이거, 네가 언젠가 필요할 것 같아서." 세라는 모르는 앱을 열어보다 덮는다. 아버지는 그냥 웃는다.</p>
+  </div>
+  <div class="chars">
+    <div class="char"><div class="char-h"><div class="av" style="background:#EAF3DE;">👧</div><div><p class="char-name">강세라</p><p class="char-pos">2050년 · 26세</p></div></div><p class="char-story">환경단체에서 일한다. 왜 이 일을 하게 됐는지 정확히 설명하지 못하지만, 이상하게 이 길이 맞는 것 같다는 느낌이 있다. 가끔 꿈에서 낯선 사람들 얼굴이 보인다. 깨고 나면 기억나지 않는다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#EAF3DE;">👨</div><div><p class="char-name">강민준</p><p class="char-pos">2050년 · 56세</p></div></div><p class="char-story">강태수건설 비리 사건의 내부 제보자로 기록됐다. 퇴직 후 환경 컨설팅을 한다. 세라가 환경단체에 취직했다는 소식을 들었을 때, 아무 말도 하지 않고 한참 창밖을 봤다. 딸은 그 이유를 모른다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#FAEEDA;">👴</div><div><p class="char-name">강태수</p><p class="char-pos">2050년 · 89세 · 집행유예 중</p></div></div><p class="char-story">기소됐지만 고령으로 집행유예를 받았다. 손녀가 자신을 무너뜨리러 왔었다는 것을, 손녀는 기억하지 못한다는 것을, 혼자 안고 산다. 일 년에 한 번, 아들 생일에 문자를 보낸다. 항상 답장이 온다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#FCEBEB;">🕴</div><div><p class="char-name">오병철</p><p class="char-pos">2050년 · 구속 중</p></div></div><p class="char-story">재판에서 "나는 회사를 지켰을 뿐"이라고 진술했다. 회장이 법정에서 그 말을 듣고 고개를 숙였다. 오병철은 회장이 자신을 변호해줄 거라 믿었다. 회장은 끝까지 입을 열지 않았다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#E6F1FB;">🐱</div><div><p class="char-name">나비</p><p class="char-pos">어딘가</p></div></div><p class="char-story">떠돌이 호랑이와 함께 사라진 후 소식이 없다. 하지만 가끔 세라의 꿈에 등장한다고 한다. 세라는 고양이를 무서워하지 않는데, 이유를 모른다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#EAF3DE;">♿</div><div><p class="char-name">루카</p><p class="char-pos">2050년 · 미래로 귀환</p></div></div><p class="char-story">2050년으로 돌아간 루카의 세계는 조금 달라져 있다. 강태수건설이 일찍 무너진 덕분에 개발이 덜 됐고, 그가 살던 오염 지역이 조금 더 살만해졌다. 그는 이게 우연이 아니라는 걸 안다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#EEEDFE;">⚖️</div><div><p class="char-name">지호</p><p class="char-pos">2026년 이후</p></div></div><p class="char-story">강태수건설 소송의 공익 제보자로 공식 등록됐다. 이후 노동 전문 공익 변호사로 활동한다. 사무실 벽에 세라의 이름이 적힌 메모지가 하나 붙어 있다. 이유는 자기도 잘 모른다고 한다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#FAEEDA;">📡</div><div><p class="char-name">소연</p><p class="char-pos">2026년 이후</p></div></div><p class="char-story">단독 특종으로 대형 언론사에 스카우트됐다. 어머니 이름이 기사 말미에 한 줄 들어갔다. "이 사건의 첫 번째 목소리는 한지영이었다." 소연이 쓴 유일한 사적인 문장이다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#E1F5EE;">🌱</div><div><p class="char-name">옥순</p><p class="char-pos">2026년 이후</p></div></div><p class="char-story">재개발이 취소된 마을에서 계속 산다. 태양광 협동조합이 잘 굴러가고 있다. 가끔 골목에서 낯선 청년이 찾아와 "혹시 세라라는 분 아세요?" 하고 묻는다고 한다. 아는 사람이 없다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#FAECE7;">💸</div><div><p class="char-name">재민</p><p class="char-pos">2026년 이후</p></div></div><p class="char-story">임팩트 투자 계약이 성사돼 자신의 첫 소셜벤처를 창업했다. 회사 이름은 "Rewind"다. 왜 그 이름을 골랐냐고 물으면 "그냥 느낌이 좋아서"라고 답한다.</p></div>
+  </div>
+</div>
+
+<!-- 굿 시크릿 -->
+<div id="gsecret" class="ending">
+  <div class="e-header hd-gsecret">
+    <p class="e-title">루프의 끝, 아니면 시작</p>
+    <p class="e-cond">달성 조건 — SV 55 이상 · 소연+지호+루카+재민 4명 동반 · 민준 관계도 MAX · [낡은 스마트폰] 보유 · P2C-04 선택지 C</p>
+    <span class="e-tag">시크릿</span><span class="e-tag">루프 확인</span><span class="e-tag">가장 먹먹한 결말</span>
+    <p class="e-scene">굿 엔딩과 동일한 장면으로 시작된다. 그런데 — 민준이 스마트폰을 건네는 순간, 세라의 손이 멈춘다. 어디선가 본 것 같은 느낌. 앱을 연다. 아이콘 하나가 눈에 들어온다. 세라는 그게 뭔지 모른다. 하지만 누른다.</p>
+  </div>
+  <div class="secret-note">
+    <span class="secret-label">시크릿 해금 장면</span>
+    <p>화면이 검게 된다. 텍스트 한 줄: "2026년. 어디서부터 시작하시겠습니까?" 세라는 기억이 없다. 그러나 손가락이 먼저 움직인다. — 루프가 다시 시작된다. 이것이 몇 번째인지는 아무도 모른다. 민준은 알고 있을지도 모른다. 그래서 항상 웃었던 것일지도.</p>
+  </div>
+  <div class="chars">
+    <div class="char"><div class="char-h"><div class="av" style="background:#E6F1FB;">👧</div><div><p class="char-name">강세라</p><p class="char-pos">루프 N회차</p></div></div><p class="char-story">기억은 없다. 그러나 몸이 기억한다. 처음 보는 골목인데 발이 먼저 방향을 안다. 처음 만나는 사람인데 이름을 알 것 같다. 세라는 이것을 운명이라고 생각한다. 민준은 이것을 사랑이라고 부른다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#E6F1FB;">👨</div><div><p class="char-name">강민준</p><p class="char-pos">루프 N회차 · 2026년</p></div></div><p class="char-story">딸이 또 왔다. 몇 번째인지 세는 것을 오래전에 그만뒀다. 매번 조금씩 다르다. 이번엔 어떤 선택을 할까. 그래도 결국 같은 자리에 오게 된다는 것을 그는 안다. 그래서 오늘도 버스정류장에서 기다린다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#FAEEDA;">👴</div><div><p class="char-name">강태수</p><p class="char-pos">루프 N회차</p></div></div><p class="char-story">이상하게 손녀 얼굴이 꿈에 자주 나온다. 만난 적도 없는데. 아들한테 물어봤더니 아들이 잠깐 굳었다가 웃으며 말했다. "그냥 꿈이에요, 아버지."</p></div>
+  </div>
+</div>
+
+<!-- 노멀 엔딩 -->
+<div id="normal" class="ending">
+  <div class="e-header hd-normal">
+    <p class="e-title">이름 없는 증거</p>
+    <p class="e-cond">달성 조건 — SV 25~39 · 또는 소연·지호 중 한 명만 보유 · 또는 클라이맥스 C(오병철만 고발)</p>
+    <span class="e-tag">부분 해결</span><span class="e-tag">아버지 생존</span><span class="e-tag">불완전한 정의</span>
+    <p class="e-scene">오병철은 구속됐다. 그러나 회장의 데이터 조작은 묻혔다. 아버지는 살았지만 세상은 크게 달라지지 않았다. 세라는 2050년으로 돌아왔다. 아버지의 무덤을 찾으러 갔다가 무덤이 없다는 걸 깨달았다. 아버지는 살아있다. 연락처도 있다. 세라는 전화를 걸지 못했다. 무슨 말을 해야 할지 몰랐다. 기억이 없으니까.</p>
+  </div>
+  <div class="chars">
+    <div class="char"><div class="char-h"><div class="av" style="background:#FAEEDA;">👧</div><div><p class="char-name">강세라</p><p class="char-pos">2050년 · 26세</p></div></div><p class="char-story">아버지가 살아있다는 걸 알지만 연락을 못 한다. 이유를 모른다. 그냥 가슴 한쪽이 뭔가 마무리가 안 된 것 같은 느낌. 환경 관련 일을 찾아보다 어떤 내부고발 사건 기사를 읽고 한참 멍하니 앉아 있었다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#FAEEDA;">👨</div><div><p class="char-name">강민준</p><p class="char-pos">2050년 · 56세</p></div></div><p class="char-story">딸이 전화를 안 한다. 기다린다. 언젠가 올 것을 안다. 그러나 언제인지는 모른다. 이번엔 다 끝내지 못했으니까. 책상 서랍 안에 오래된 메모가 있다. "다음엔 더 잘하자."</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#FAEEDA;">👴</div><div><p class="char-name">강태수</p><p class="char-pos">2050년 · 89세</p></div></div><p class="char-story">오병철만 처벌받고 자신은 무사했다. 그런데 이상하게 잠을 못 잔다. 아무도 자신을 고발하지 않았는데, 스스로 무언가를 알아버린 것 같다. 아들한테 미안하다는 말을 아직 못 했다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#FAEEDA;">🕴</div><div><p class="char-name">오병철</p><p class="char-pos">2050년 · 구속 중</p></div></div><p class="char-story">혼자 모든 죄를 뒤집어썼다고 생각한다. 틀린 말은 아니다. 그러나 그게 전부가 아니라는 것도 알고 있다. 회장이 면회를 한 번도 오지 않았다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#FAEEDA;">🐱</div><div><p class="char-name">나비</p><p class="char-pos">어딘가</p></div></div><p class="char-story">나비와 함께였다면 잠입이 더 쉬웠을 것이다. 세라는 가끔 그 생각을 한다. 기억은 없지만 고양이가 그리운 것 같다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#FAEEDA;">♿</div><div><p class="char-name">루카</p><p class="char-pos">2050년</p></div></div><p class="char-story">루카의 2050년은 굿 엔딩보다 조금 더 거칠다. 개발이 완전히 막히지 않았으니까. 그래도 예전보다 낫다. 조금이라도 나아진 게 어딘가. 그는 그것으로 충분하다고 생각하려 한다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#FAEEDA;">⚖️</div><div><p class="char-name">지호</p><p class="char-pos">2026년 이후</p></div></div><p class="char-story">오병철 건을 처리했지만 회장 건은 증거가 부족했다. 미완성이다. 서랍 속에 그 서류를 아직 버리지 못했다. 언젠가 다시 꺼낼 날이 올 것 같아서.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#FAEEDA;">📡</div><div><p class="char-name">소연</p><p class="char-pos">2026년 이후</p></div></div><p class="char-story">기사는 냈다. 그러나 절반짜리였다. 어머니 이름은 기사에 들어갔지만, 진짜 책임자는 처벌받지 않았다. 소연은 그 기사를 아직도 다시 쓰고 싶어 한다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#FAEEDA;">🌱</div><div><p class="char-name">옥순</p><p class="char-pos">2026년 이후</p></div></div><p class="char-story">재개발이 일부 취소됐다. 마을 반은 지켰고 반은 잃었다. 남은 반에서 계속 산다. 예전보다 골목이 조용해졌다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#FAEEDA;">💸</div><div><p class="char-name">재민</p><p class="char-pos">2026년 이후</p></div></div><p class="char-story">임팩트 투자 연결이 반쯤 됐다. 소셜벤처는 시작했지만 자금이 빠듯하다. 그래도 포기하지 않는다. 언젠가 돌아올 것 같은 투자자 이름이 머릿속에 맴돈다.</p></div>
+  </div>
+</div>
+
+<!-- 배드 엔딩 -->
+<div id="bad" class="ending">
+  <div class="e-header hd-bad">
+    <p class="e-title">처음부터 없었던 일</p>
+    <p class="e-cond">달성 조건 — SV 24 이하 · 또는 클라이맥스 D(침묵) 선택</p>
+    <span class="e-tag">역사 미변경</span><span class="e-tag">아버지 사망 유지</span><span class="e-tag">귀환</span>
+    <p class="e-scene">증거를 공개하지 못했다. 혹은 공개해도 막혔다. 세라는 2050년으로 돌아왔다. 아버지의 무덤은 그대로였다. 스마트폰을 켜보니 앱이 사라져 있었다. 배터리가 다 됐을 뿐이다. 세라는 생수 한 병을 샀다. 5만 원.</p>
+  </div>
+  <div class="chars">
+    <div class="char"><div class="char-h"><div class="av" style="background:#F1EFE8;">👧</div><div><p class="char-name">강세라</p><p class="char-pos">2050년 · 26세</p></div></div><p class="char-story">아무것도 바뀌지 않았다. 비상금 계좌 비밀번호도 몰랐다. 생수는 여전히 5만 원이다. 그런데 이상하게 — 울고 싶지 않다. 다녀온 것 같은 기분이 든다. 어딜 다녀왔는지는 모른다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#F1EFE8;">👨</div><div><p class="char-name">강민준</p><p class="char-pos">2040년 · 사망</p></div></div><p class="char-story">역사는 바뀌지 않았다. 2040년 3월 11일, 그는 교통사고로 사망했다. 그가 남긴 스마트폰 안에 앱이 있었다. 배터리가 다 됐다. 다음에 충전하면 다시 켜질 수도 있다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#F1EFE8;">👴</div><div><p class="char-name">강태수</p><p class="char-pos">2050년 · 89세</p></div></div><p class="char-story">아무 일도 없었다. 회사는 잘 돌아가고 있다. 아들 기일에 성묘를 간다. 매번 같은 자리에 오래 앉아 있다가 돌아온다. 무슨 생각을 하는지 아무도 모른다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#F1EFE8;">🕴</div><div><p class="char-name">오병철</p><p class="char-pos">2050년 · 은퇴</p></div></div><p class="char-story">아무 처벌도 받지 않았다. 정년퇴직 후 조용히 산다. 가끔 뉴스에서 강태수건설 개발 사업 기사를 본다. 뭔가 잘못됐다는 생각이 드는데, 그게 무엇인지 구체적으로 생각하지 않는다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#F1EFE8;">🐱</div><div><p class="char-name">나비</p><p class="char-pos">어딘가</p></div></div><p class="char-story">이 엔딩에서 나비가 어떻게 됐는지는 아무도 모른다. 세라가 기억이 없으니까. 고양이는 원래 혼자서도 잘 산다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#F1EFE8;">♿</div><div><p class="char-name">루카</p><p class="char-pos">2050년</p></div></div><p class="char-story">2050년은 그대로다. 루카의 오염 지역도 그대로다. 그는 오늘도 버텨낸다. 세라라는 이름을 모르지만 언젠가 누군가 바꿔줄 거라는 느낌을 버리지 않는다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#F1EFE8;">⚖️</div><div><p class="char-name">지호</p><p class="char-pos">2026년 이후</p></div></div><p class="char-story">그 사건이 묻혔다는 것을 안다. 혼자 서류를 모아뒀다. 언젠가 다시 기회가 올 것 같아서. 누가 시킨 것도 아닌데 손이 저절로 그 서류를 꺼낸다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#F1EFE8;">📡</div><div><p class="char-name">소연</p><p class="char-pos">2026년 이후</p></div></div><p class="char-story">기사를 내지 못했다. 어머니 이름은 들어가지 않았다. 소연은 채널을 계속 운영한다. 구독자 300명. 포기하지 않는다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#F1EFE8;">🌱</div><div><p class="char-name">옥순</p><p class="char-pos">2026년 이후</p></div></div><p class="char-story">마을이 재개발됐다. 이사했다. 새 동네에서도 이웃들과 협동조합을 만들었다. 장소가 바뀌어도 하던 대로 한다. 그게 옥순이다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#F1EFE8;">💸</div><div><p class="char-name">재민</p><p class="char-pos">2026년 이후</p></div></div><p class="char-story">자금이 끊겼다. 소셜벤처 창업은 다음으로 미뤘다. 그래도 노트에 사업 계획을 계속 쓴다. 언젠가 맞는 사람을 만날 것 같아서.</p></div>
+  </div>
+</div>
+
+<!-- 배드 시크릿 -->
+<div id="bsecret" class="ending">
+  <div class="e-header hd-bsecret">
+    <p class="e-title">배터리를 충전하면</p>
+    <p class="e-cond">달성 조건 — SV 24 이하 · 배드 엔딩 도달 · 엔딩 화면에서 스마트폰 충전 시도 (특정 입력)</p>
+    <span class="e-tag">시크릿</span><span class="e-tag">루프 재개</span><span class="e-tag">희망 또는 저주</span>
+    <p class="e-scene">배드 엔딩에서 앱이 꺼진 스마트폰을 충전기에 꽂는다. 화면이 켜진다. 앱이 살아있다. 세라는 아무것도 기억하지 못한다. 앱을 처음 보는 것처럼 누른다. 화면: "2026년. 어디서부터 시작하시겠습니까?" — 루프가 다시 시작된다.</p>
+  </div>
+  <div class="secret-note">
+    <span class="secret-label">시크릿 포인트</span>
+    <p>굿 시크릿과 같은 화면, 같은 텍스트. 그러나 분위기가 완전히 다르다. 굿 시크릿은 "또 시작되는 사랑의 루프"지만, 배드 시크릿은 "실패를 반복해야 하는 루프"다. 민준은 이번에도 버스정류장에서 기다리고 있다. 몇 번째인지는 아무도 모른다. 그래도 기다린다.</p>
+  </div>
+  <div class="chars">
+    <div class="char"><div class="char-h"><div class="av" style="background:#FCEBEB;">👧</div><div><p class="char-name">강세라</p><p class="char-pos">루프 재개 · 기억 없음</p></div></div><p class="char-story">또 시작이다. 세라는 모른다. 처음인 것 같다. 그런데 이 앱을 보자마자 손가락이 먼저 눌렀다. 몸이 기억하는 게 있는 것 같기도 하고, 그냥 습관인 것 같기도 하다.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#FCEBEB;">👨</div><div><p class="char-name">강민준</p><p class="char-pos">2026년 · 기다리는 중</p></div></div><p class="char-story">또 왔다. 이번에도 잘 될지 모르겠다. 그래도 포기하지 않는다. 앱을 만든 것도, 매번 기다리는 것도, 결국 같은 이유다. 딸이 언젠가는 해낼 거라는 것을 아니까.</p></div>
+    <div class="char"><div class="char-h"><div class="av" style="background:#FCEBEB;">👴</div><div><p class="char-name">강태수</p><p class="char-pos">2026년</p></div></div><p class="char-story">이번에도 손녀를 모른다. 오병철에게 지시를 내린다. "조용히 막아." 그 말이 무엇을 의미하게 될지 아직 모른다. 매번 모른다.</p></div>
+  </div>
+</div>
+
+<!-- 푸터 -->
+<footer class="page-footer">
+  <strong>REWIND2026: Social Connect</strong>
+  엔딩 가이드 &amp; 후일담 · Story Bible v2.0
+</footer>
+
+<script>
+function showEnding(id) {
+  document.querySelectorAll('.ending').forEach(e => e.className = 'ending');
+  document.querySelectorAll('.etab').forEach(t => t.classList.remove('on'));
+  document.getElementById(id).className = 'ending on';
+  const map = { good: 0, gsecret: 1, normal: 2, bad: 3, bsecret: 4 };
+  document.querySelectorAll('.etab')[map[id]].classList.add('on');
+}
+</script>
+</body>
+</html>

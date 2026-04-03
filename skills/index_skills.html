@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>이벤트 아이템 — REWIND 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #fff8f5;
+  --surface: #ffffff;
+  --text: #3d2f3d;
+  --muted: #a090a0;
+  --border: rgba(180,140,180,0.13);
+  --shadow: 0 4px 18px rgba(160,100,180,0.09);
+  --shadow-h: 0 10px 36px rgba(160,100,180,0.16);
+  --r: 20px;
+
+  /* 구역 색상 */
+  --z1: #b8d9f7; --z1-soft: #eef6ff; --z1-deep: #3a80c9; --z1-badge: #dceeff;
+  --z2: #b4e8d8; --z2-soft: #edfaf5; --z2-deep: #2aaa82; --z2-badge: #d5f5ec;
+  --z3: #fde9a2; --z3-soft: #fffbec; --z3-deep: #c99a10; --z3-badge: #fef7d0;
+  --z4: #d4bbf5; --z4-soft: #f4f0ff; --z4-deep: #7c4ddb; --z4-badge: #ebe5ff;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  font-family: 'Nunito', 'Apple SD Gothic Neo', sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── 페이지 헤더 ── */
+.page-header {
+  text-align: center;
+  padding: 52px 24px 36px;
+}
+.back-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.78rem; font-weight: 700; color: var(--muted);
+  text-decoration: none; letter-spacing: 0.06em; margin-bottom: 24px;
+  transition: color .2s;
+}
+.back-link:hover { color: var(--text); }
+.page-title {
+  font-family: 'Nunito', sans-serif; font-size: clamp(1.8rem,5vw,3rem);
+  font-weight: 900; letter-spacing: -0.02em;
+  background: linear-gradient(130deg,#e07aaa,#9b6fdb,#5faed6);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; margin-bottom: 6px;
+}
+.page-sub {
+  font-family: 'Gowun Batang', serif; font-size: 0.88rem;
+  color: var(--muted); letter-spacing: 0.08em;
+}
+
+/* ── 구역 래퍼 ── */
+.zone { max-width: 1140px; margin: 0 auto; padding: 0 24px 56px; }
+
+/* ── 구역 헤더 ── */
+.zone-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px; padding: 14px 22px;
+  border-radius: 16px;
+  position: relative; overflow: hidden;
+}
+.zone-header::before {
+  content: ''; position: absolute; inset: 0;
+  opacity: 0.18; border-radius: inherit;
+}
+.z1 .zone-header { background: var(--z1-soft); border: 1.5px solid var(--z1); }
+.z2 .zone-header { background: var(--z2-soft); border: 1.5px solid var(--z2); }
+.z3 .zone-header { background: var(--z3-soft); border: 1.5px solid var(--z3); }
+.z4 .zone-header { background: var(--z4-soft); border: 1.5px solid var(--z4); }
+
+.zone-num {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem; font-weight: 900; flex-shrink: 0;
+  margin-right: 12px;
+}
+.z1 .zone-num { background: var(--z1); color: var(--z1-deep); }
+.z2 .zone-num { background: var(--z2); color: var(--z2-deep); }
+.z3 .zone-num { background: var(--z3); color: var(--z3-deep); }
+.z4 .zone-num { background: var(--z4); color: var(--z4-deep); }
+
+.zone-title-wrap { display: flex; align-items: center; gap: 0; flex: 1; }
+.zone-name {
+  font-size: 1.05rem; font-weight: 900; letter-spacing: -0.01em; color: var(--text);
+}
+.zone-env {
+  font-size: 0.72rem; font-weight: 700; padding: 3px 12px;
+  border-radius: 999px; white-space: nowrap;
+}
+.z1 .zone-env { background: var(--z1-badge); color: var(--z1-deep); }
+.z2 .zone-env { background: var(--z2-badge); color: var(--z2-deep); }
+.z3 .zone-env { background: var(--z3-badge); color: var(--z3-deep); }
+.z4 .zone-env { background: var(--z4-badge); color: var(--z4-deep); }
+
+/* ── 카드 그리드 ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+/* ── 아이템 카드 ── */
+.item-card {
+  background: var(--surface);
+  border-radius: var(--r);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 0;
+  overflow: hidden;
+  transition: transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .2s;
+  display: flex; flex-direction: column;
+}
+.item-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-h);
+}
+
+/* 카드 상단 색 띠 */
+.card-top {
+  height: 6px; border-radius: 0;
+}
+.z1 .card-top { background: linear-gradient(90deg, var(--z1), #e8f4ff); }
+.z2 .card-top { background: linear-gradient(90deg, var(--z2), #d5f5ec); }
+.z3 .card-top { background: linear-gradient(90deg, var(--z3), #fef7d0); }
+.z4 .card-top { background: linear-gradient(90deg, var(--z4), #ebe5ff); }
+
+.card-body { padding: 18px 18px 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+
+/* 아이템 이름 */
+.item-name {
+  font-size: 0.97rem; font-weight: 800; color: var(--text);
+  letter-spacing: -0.01em; line-height: 1.3;
+}
+
+/* 기업 뱃지 */
+.company-badge {
+  display: inline-flex; align-items: center;
+  font-size: 0.68rem; font-weight: 700;
+  padding: 3px 10px; border-radius: 999px;
+  line-height: 1.4; width: fit-content;
+}
+.z1 .company-badge { background: var(--z1-badge); color: var(--z1-deep); }
+.z2 .company-badge { background: var(--z2-badge); color: var(--z2-deep); }
+.z3 .company-badge { background: var(--z3-badge); color: var(--z3-deep); }
+.z4 .company-badge { background: var(--z4-badge); color: var(--z4-deep); }
+
+/* 설명 */
+.item-desc {
+  font-size: 0.78rem; color: var(--muted); line-height: 1.65;
+  flex: 1;
+}
+
+/* 구분선 */
+.divider {
+  border: none; border-top: 1px solid var(--border); margin: 2px 0;
+}
+
+/* 이벤트 / 스토리 / 동료 행 */
+.tag-row {
+  display: flex; gap: 6px; align-items: flex-start;
+}
+.row-type {
+  font-size: 0.62rem; font-weight: 800; padding: 2px 8px;
+  border-radius: 999px; flex-shrink: 0; margin-top: 1px;
+  letter-spacing: 0.04em; white-space: nowrap;
+}
+.rt-event  { background: #fff0f3; color: #d05070; }
+.rt-story  { background: #eef6ff; color: #3a80c9; }
+.rt-ally   { background: #f0faf6; color: #2aaa82; }
+
+.row-text {
+  font-size: 0.75rem; color: var(--text); line-height: 1.6;
+  font-weight: 600;
+}
+.row-text .arrow { color: var(--muted); font-weight: 400; }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <a href="../index.html" class="back-link">← REWIND 2026</a>
+  <h1 class="page-title">🎪 이벤트 아이템</h1>
+  <p class="page-sub">각 구역에서 획득할 수 있는 특수 아이템 목록</p>
+</header>
+
+<!-- ══════════════════════════════════════════
+     구역 01 — 빙하 구역
+══════════════════════════════════════════ -->
+<section class="zone z1">
+  <div class="zone-header">
+    <div class="zone-title-wrap">
+      <span class="zone-num">01</span>
+      <span class="zone-name">빙하 구역</span>
+    </div>
+    <span class="zone-env">환경: 해수면 상승 + 극한 한파</span>
+  </div>
+  <div class="card-grid">
+
+    <div class="item-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <p class="item-name">냉매 회수 캡슐</p>
+        <span class="company-badge">포이엔 · 에코라이프살림</span>
+        <p class="item-desc">폐가전에서 온실가스 냉매를 빨아들여 소형 캡슐에 압축 저장. 던지면 반경 3m 빙결.</p>
+        <div class="divider"></div>
+        <div class="tag-row">
+          <span class="row-type rt-event">이벤트</span>
+          <span class="row-text">공장 화재 진압 <span class="arrow">→</span> SV +15, 멘탈 +5</span>
+        </div>
+        <div class="tag-row">
+          <span class="row-type rt-story">스토리</span>
+          <span class="row-text">할아버지 경호원 저지 (클라이맥스 1분기)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <p class="item-name">열전 발전 부츠</p>
+        <span class="company-badge">루미르 (열전발전 LED)</span>
+        <p class="item-desc">보행 시 체온-외기 온도차로 전기 생산. 이동할수록 자금이 소량 충전됨.</p>
+        <div class="divider"></div>
+        <div class="tag-row">
+          <span class="row-type rt-event">이벤트</span>
+          <span class="row-text">정전 지역 가로등 점등 <span class="arrow">→</span> SV +12</span>
+        </div>
+        <div class="tag-row">
+          <span class="row-type rt-ally">동료</span>
+          <span class="row-text">루카 영입 조건 중 하나 (이동 보조 가능 증명)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <p class="item-name">페타이어 방한판</p>
+        <span class="company-badge">리텝즈컴퍼니 (페타이어 원단)</span>
+        <p class="item-desc">페타이어 고무층을 얇게 슬라이싱한 단열 패널로. 판자 존 집수리에 무상 제공 가능.</p>
+        <div class="divider"></div>
+        <div class="tag-row">
+          <span class="row-type rt-event">이벤트</span>
+          <span class="row-text">고시원 화재 피해 가축 지원 <span class="arrow">→</span> SV +13</span>
+        </div>
+        <div class="tag-row">
+          <span class="row-type rt-story">스토리</span>
+          <span class="row-text">아버지의 폭방 수색 시 위장 도구로 활용</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <p class="item-name">생분해 단열 폼</p>
+        <span class="company-badge">포맨코리아 (셀룰로오즈 발포폼)</span>
+        <p class="item-desc">폐지를 미세분쇄해 수중기 발포. 가볍고 생분해되는 비상 단열재. 1회용 방어막 설치.</p>
+        <div class="divider"></div>
+        <div class="tag-row">
+          <span class="row-type rt-event">이벤트</span>
+          <span class="row-text">한파 노숙인 임시 쉼터 구축 <span class="arrow">→</span> SV +14</span>
+        </div>
+        <div class="tag-row">
+          <span class="row-type rt-ally">동료</span>
+          <span class="row-text">나비 영입 시 고급 잠자리 제공 <span class="arrow">→</span> 호감도 +1</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     구역 02 — 바다 구역
+══════════════════════════════════════════ -->
+<section class="zone z2">
+  <div class="zone-header">
+    <div class="zone-title-wrap">
+      <span class="zone-num">02</span>
+      <span class="zone-name">바다 구역</span>
+    </div>
+    <span class="zone-env">환경: 미세플라스틱 + 페어망 오염</span>
+  </div>
+  <div class="card-grid">
+
+    <div class="item-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <p class="item-name">석세포 나노 필터</p>
+        <span class="company-badge">루츠팜 (배 석세포 연마제)</span>
+        <p class="item-desc">배 과육에서 추출한 천연 연마 입자로 미세플라스틱 제거. 오염수를 식수로 정화.</p>
+        <div class="divider"></div>
+        <div class="tag-row">
+          <span class="row-type rt-event">이벤트</span>
+          <span class="row-text">단수 지역 식수 공급 <span class="arrow">→</span> SV +15, 식량 +10</span>
+        </div>
+        <div class="tag-row">
+          <span class="row-type rt-story">스토리</span>
+          <span class="row-text">기업 오염 증거 채수 (메인 퀘스트 필수)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <p class="item-name">페어망 섬유 갑옷</p>
+        <span class="company-badge">넷스파 (페어망 → 엔지니어링 플라스틱)</span>
+        <p class="item-desc">PA6 페어망을 재생해 만든 방호복. 물리 피해 시 멘탈 손실 30% 감소.</p>
+        <div class="divider"></div>
+        <div class="tag-row">
+          <span class="row-type rt-event">이벤트</span>
+          <span class="row-text">폭력 시위 현장 보호 <span class="arrow">→</span> 멘탈 손실 차단</span>
+        </div>
+        <div class="tag-row">
+          <span class="row-type rt-ally">동료</span>
+          <span class="row-text">루카 영입 후 맞춤 개조 <span class="arrow">→</span> 이동속도 패시브</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <p class="item-name">커피숯 흡착제</p>
+        <span class="company-badge">도시광부 (커피찌꺼기 탄소 추출)</span>
+        <p class="item-desc">커피박에서 뽑은 활성탄. 독소·유해물질 흡착. 중독 이벤트에서 해독제로 사용.</p>
+        <div class="divider"></div>
+        <div class="tag-row">
+          <span class="row-type rt-event">이벤트</span>
+          <span class="row-text">독성 음식 제공 함정 회피 <span class="arrow">→</span> 멘탈 보존</span>
+        </div>
+        <div class="tag-row">
+          <span class="row-type rt-story">스토리</span>
+          <span class="row-text">기업 내부자 포섭 시 증거 인멸 차단</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <p class="item-name">수면 정화 드론</p>
+        <span class="company-badge">쉐코 (수면 정화 로봇)</span>
+        <p class="item-desc">소형 원격 드론이 수면 위 쓰레기를 수거. 정화 면적에 따라 SV 점진 획득.</p>
+        <div class="divider"></div>
+        <div class="tag-row">
+          <span class="row-type rt-event">이벤트</span>
+          <span class="row-text">강변 수권 오염 정화 <span class="arrow">→</span> SV +10, 자금 +5</span>
+        </div>
+        <div class="tag-row">
+          <span class="row-type rt-ally">동료</span>
+          <span class="row-text">나비와 콤보 시 탐색 범위 2배 (숨겨진 이벤트 해금)</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     구역 03 — 사막 구역
+══════════════════════════════════════════ -->
+<section class="zone z3">
+  <div class="zone-header">
+    <div class="zone-title-wrap">
+      <span class="zone-num">03</span>
+      <span class="zone-name">사막 구역</span>
+    </div>
+    <span class="zone-env">환경: 토양 산성화 + 식량난</span>
+  </div>
+  <div class="card-grid">
+
+    <div class="item-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <p class="item-name">큐브팜 컨테이너</p>
+        <span class="company-badge">도시농사꾼 (ISO 냉동컨테이너 스마트팜)</span>
+        <p class="item-desc">폐 컨테이너를 수직농장으로 개조. 극한 환경에서 채소 생산. 턴당 식량 +3.</p>
+        <div class="divider"></div>
+        <div class="tag-row">
+          <span class="row-type rt-event">이벤트</span>
+          <span class="row-text">폐교 운동장에 설치 <span class="arrow">→</span> SV +14, 식량 지속 공급</span>
+        </div>
+        <div class="tag-row">
+          <span class="row-type rt-ally">동료</span>
+          <span class="row-text">루카 영입 조건 (식량 30 이상 필요)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <p class="item-name">못난이 구출 키트</p>
+        <span class="company-badge">파머스페이스 · 밸리스 (못난이 농산물 업사이클)</span>
+        <p class="item-desc">폐기 직전 B급 농산물을 가공해 영양 압축 바 제작. 자금 최소화로 식량 보충.</p>
+        <div class="divider"></div>
+        <div class="tag-row">
+          <span class="row-type rt-event">이벤트</span>
+          <span class="row-text">소농가 지원 <span class="arrow">→</span> SV +12, 자금 -5, 식량 +15</span>
+        </div>
+        <div class="tag-row">
+          <span class="row-type rt-story">스토리</span>
+          <span class="row-text">아버지 은신처 식량 지원 (스토리 분기)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <p class="item-name">EM 활성 정화제</p>
+        <span class="company-badge">소화아람필터 (EM 활성액 생활세제)</span>
+        <p class="item-desc">유효 미생물군으로 산성 토양 중화. 구역 내 이동 시 토양 독성 피해 무력화.</p>
+        <div class="divider"></div>
+        <div class="tag-row">
+          <span class="row-type rt-event">이벤트</span>
+          <span class="row-text">산성 호수 정화 <span class="arrow">→</span> SV +13, 마을 해금</span>
+        </div>
+        <div class="tag-row">
+          <span class="row-type rt-story">스토리</span>
+          <span class="row-text">오염 구역 통과 필수 아이템 (메인 2회차)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <p class="item-name">드론 방제 서비스</p>
+        <span class="company-badge">제주도드론 (농업용 방제 드론)</span>
+        <p class="item-desc">저가 농업드론으로 취약 농가에 방제 지원. 협력 농가에서 식량 무상 수급.</p>
+        <div class="divider"></div>
+        <div class="tag-row">
+          <span class="row-type rt-event">이벤트</span>
+          <span class="row-text">해충 피해 농가 구제 <span class="arrow">→</span> SV +11, 식량 +8</span>
+        </div>
+        <div class="tag-row">
+          <span class="row-type rt-ally">동료</span>
+          <span class="row-text">나비와 콤보 <span class="arrow">→</span> 잠입 정찰 가능 (기업 창고 탐색)</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     구역 04 — 열린 밤 구역
+══════════════════════════════════════════ -->
+<section class="zone z4">
+  <div class="zone-header">
+    <div class="zone-title-wrap">
+      <span class="zone-num">04</span>
+      <span class="zone-name">열린 밤 구역</span>
+    </div>
+    <span class="zone-env">환경: 에너지 고갈 + 완전 암흑</span>
+  </div>
+  <div class="card-grid">
+
+    <div class="item-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <p class="item-name">파보젠 보도블럭</p>
+        <span class="company-badge">빅워크 · 아이솔라에너지 (보행 에너지 변환)</span>
+        <p class="item-desc">보행 압력을 전기로 변환하는 블럭. 설치 후 유동인구 많은 구역에서 자금 패시브.</p>
+        <div class="divider"></div>
+        <div class="tag-row">
+          <span class="row-type rt-event">이벤트</span>
+          <span class="row-text">지하상가 전력 복구 <span class="arrow">→</span> SV +14, 자금 +8</span>
+        </div>
+        <div class="tag-row">
+          <span class="row-type rt-story">스토리</span>
+          <span class="row-text">회사 침투 시 감시 카메라 전원 차단 (스텔스)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <p class="item-name">가상발전소 앱</p>
+        <span class="company-badge">식스티헤르츠 (AI 기반 VPP 운영)</span>
+        <p class="item-desc">분산된 소형 발전기를 하나로 묶어 집합 운영. 에너지 이벤트 성공률 +40%.</p>
+        <div class="divider"></div>
+        <div class="tag-row">
+          <span class="row-type rt-event">이벤트</span>
+          <span class="row-text">병원 정전 응급 해결 <span class="arrow">→</span> SV +15, 멘탈 +8</span>
+        </div>
+        <div class="tag-row">
+          <span class="row-type rt-ally">동료</span>
+          <span class="row-text">루카 필수 (정신 감응으로 네트워크 최적화)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <p class="item-name">전기차 리파워 키트</p>
+        <span class="company-badge">제이엠웨이브 (내연기관 → 전기차 변환)</span>
+        <p class="item-desc">폐경유차를 현장에서 전기차로 즉시 개조. 이동 시 자금 소모 0, 이동 범위 확대.</p>
+        <div class="divider"></div>
+        <div class="tag-row">
+          <span class="row-type rt-event">이벤트</span>
+          <span class="row-text">택배 기사 차량 개조 지원 <span class="arrow">→</span> SV +13, 동료 인맥 +1</span>
+        </div>
+        <div class="tag-row">
+          <span class="row-type rt-story">스토리</span>
+          <span class="row-text">클라이맥스 탈출 시 퀀스 전용 (필수 아이템)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <p class="item-name">RFID 자원순환 태그</p>
+        <span class="company-badge">써큘러랩스 (RFID 다회용기 추적)</span>
+        <p class="item-desc">물건마다 태그를 붙여 사용 이력·탄소 절감량 자동 측정. SV 보너스 배율 계산.</p>
+        <div class="divider"></div>
+        <div class="tag-row">
+          <span class="row-type rt-event">이벤트</span>
+          <span class="row-text">축제 쓰레기 제로화 달성 <span class="arrow">→</span> SV +12, 자금 +6</span>
+        </div>
+        <div class="tag-row">
+          <span class="row-type rt-story">스토리</span>
+          <span class="row-text">기업 비자금 추적 증거 수집 (탄소크레딧 조작 폭로)</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>

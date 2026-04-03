@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>동반자들 — REWIND 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #fff8f5;
+  --surface: #ffffff;
+  --text: #3d2f3d;
+  --muted: #a090a0;
+  --shadow: 0 8px 32px rgba(160,100,180,0.10);
+  --shadow-hover: 0 16px 48px rgba(160,100,180,0.18);
+
+  --nabi:    #ffb7c5; --nabi-soft:   #fff0f3; --nabi-deep:   #d4607a;
+  --luca:    #b4e8d8; --luca-soft:   #edfaf5; --luca-deep:   #2e9e7e;
+  --jiho:    #cbb8f7; --jiho-soft:   #f3f0ff; --jiho-deep:   #7c54e0;
+  --soyeon:  #fde9a2; --soyeon-soft: #fffcec; --soyeon-deep: #b8880e;
+  --oksun:   #9fd8f5; --oksun-soft:  #eef7ff; --oksun-deep:  #2878b8;
+  --jaemin:  #ffc89a; --jaemin-soft: #fff5ec; --jaemin-deep: #c8620a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  font-family: 'Nunito', 'Apple SD Gothic Neo', sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── 페이지 헤더 ── */
+.page-header {
+  text-align: center;
+  padding: 52px 24px 36px;
+}
+.back-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
+  color: var(--muted); text-decoration: none;
+  margin-bottom: 24px; transition: color .2s;
+}
+.back-link:hover { color: var(--text); }
+.page-title {
+  font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 900;
+  letter-spacing: -0.02em;
+  background: linear-gradient(130deg, #e07aaa 0%, #9b6fdb 50%, #5faed6 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 8px;
+}
+.page-sub { font-family: 'Gowun Batang', serif; font-size: 0.88rem; color: var(--muted); letter-spacing: 0.1em; }
+
+/* ── 카드 그리드 ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 28px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* ── 카드 기본 ── */
+.card {
+  background: var(--surface);
+  border-radius: 32px;
+  box-shadow: var(--shadow);
+  border: 1.5px solid rgba(180,140,200,0.12);
+  overflow: hidden;
+  transition: transform .28s cubic-bezier(.34,1.56,.64,1), box-shadow .22s ease;
+  animation: popUp .5s cubic-bezier(.34,1.56,.64,1) both;
+}
+.card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+
+@keyframes popUp {
+  from { opacity: 0; transform: translateY(20px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);   }
+}
+.card:nth-child(1){animation-delay:.05s}
+.card:nth-child(2){animation-delay:.12s}
+.card:nth-child(3){animation-delay:.19s}
+.card:nth-child(4){animation-delay:.26s}
+.card:nth-child(5){animation-delay:.33s}
+.card:nth-child(6){animation-delay:.40s}
+
+/* ── 히어로 영역 ── */
+.card-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px 24px 22px;
+  text-align: center;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  /* 둥근 파도 형태로 아래쪽 잘림 */
+  border-radius: 32px 32px 60% 60% / 32px 32px 44px 44px;
+}
+.card-nabi   .hero-bg { background: radial-gradient(ellipse at 50% 0%, #ffd4df 0%, var(--nabi-soft) 70%); }
+.card-luca   .hero-bg { background: radial-gradient(ellipse at 50% 0%, #c8f5e8 0%, var(--luca-soft) 70%); }
+.card-jiho   .hero-bg { background: radial-gradient(ellipse at 50% 0%, #ddd0fc 0%, var(--jiho-soft) 70%); }
+.card-soyeon .hero-bg { background: radial-gradient(ellipse at 50% 0%, #fdf0b0 0%, var(--soyeon-soft) 70%); }
+.card-oksun  .hero-bg { background: radial-gradient(ellipse at 50% 0%, #c0e8fc 0%, var(--oksun-soft) 70%); }
+.card-jaemin .hero-bg { background: radial-gradient(ellipse at 50% 0%, #ffdcb8 0%, var(--jaemin-soft) 70%); }
+
+/* ── 원형 아바타 ── */
+.avatar {
+  position: relative; z-index: 1;
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.6rem;
+  border: 4px solid #fff;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+  margin-bottom: 14px;
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.card:hover .avatar { transform: scale(1.10) rotate(-5deg); }
+
+.card-nabi   .avatar { background: linear-gradient(145deg, #ffd4de, var(--nabi)); }
+.card-luca   .avatar { background: linear-gradient(145deg, #c8f5e8, var(--luca)); }
+.card-jiho   .avatar { background: linear-gradient(145deg, #ddd0fc, var(--jiho)); }
+.card-soyeon .avatar { background: linear-gradient(145deg, #fef3c0, var(--soyeon)); }
+.card-oksun  .avatar { background: linear-gradient(145deg, #c0e8fc, var(--oksun)); }
+.card-jaemin .avatar { background: linear-gradient(145deg, #ffdcb8, var(--jaemin)); }
+
+.char-name {
+  position: relative; z-index: 1;
+  font-size: 1.05rem; font-weight: 800; letter-spacing: -0.01em;
+  color: var(--text); margin-bottom: 4px;
+}
+.char-role {
+  position: relative; z-index: 1;
+  font-size: 0.72rem; color: var(--muted); font-weight: 600; letter-spacing: 0.04em;
+  margin-bottom: 12px;
+}
+.badge {
+  position: relative; z-index: 1;
+  display: inline-block;
+  font-size: 0.68rem; font-weight: 800;
+  padding: 4px 14px; border-radius: 999px; letter-spacing: 0.06em;
+}
+.card-nabi   .badge { background: var(--nabi);   color: var(--nabi-deep); }
+.card-luca   .badge { background: var(--luca);   color: var(--luca-deep); }
+.card-jiho   .badge { background: var(--jiho);   color: var(--jiho-deep); }
+.card-soyeon .badge { background: var(--soyeon); color: var(--soyeon-deep); }
+.card-oksun  .badge { background: var(--oksun);  color: var(--oksun-deep); }
+.card-jaemin .badge { background: var(--jaemin); color: var(--jaemin-deep); }
+
+/* ── 카드 바디 ── */
+.card-body {
+  padding: 20px 22px 24px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.section-label {
+  font-size: 0.67rem; font-weight: 800; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 7px;
+}
+
+/* ── 트리거 ── */
+.trigger-list { display: flex; flex-direction: column; gap: 8px; }
+.trigger-item { border-radius: 18px; padding: 12px 14px; }
+.card-nabi   .trigger-item { background: var(--nabi-soft); }
+.card-luca   .trigger-item { background: var(--luca-soft); }
+.card-jiho   .trigger-item { background: var(--jiho-soft); }
+.card-soyeon .trigger-item { background: var(--soyeon-soft); }
+.card-oksun  .trigger-item { background: var(--oksun-soft); }
+.card-jaemin .trigger-item { background: var(--jaemin-soft); }
+
+.trigger-event {
+  font-size: 0.78rem; font-weight: 800; color: var(--text);
+  margin-bottom: 5px; line-height: 1.4;
+}
+.trigger-unlock {
+  font-size: 0.72rem; color: var(--muted); font-weight: 600; line-height: 1.55;
+}
+
+.divider { height: 1px; background: rgba(180,140,200,0.13); border: none; }
+
+/* ── 이탈 ── */
+.leave-list { display: flex; flex-direction: column; gap: 8px; }
+.leave-item { border-radius: 18px; padding: 12px 14px; }
+.leave-good { background: #f0faf5; }
+.leave-bad  { background: #fff2f2; }
+
+.leave-tag {
+  display: inline-block; font-size: 0.65rem; font-weight: 800;
+  padding: 3px 10px; border-radius: 999px; margin-bottom: 7px; letter-spacing: 0.05em;
+}
+.leave-good .leave-tag { background: #c8f0df; color: #1a7a50; }
+.leave-bad  .leave-tag { background: #fcc8c8; color: #a02020; }
+
+.leave-event { font-size: 0.78rem; font-weight: 800; color: var(--text); margin-bottom: 4px; line-height: 1.4; }
+.leave-choice { font-size: 0.72rem; color: var(--muted); font-weight: 600; line-height: 1.5; margin-bottom: 5px; }
+.leave-result { font-size: 0.72rem; font-weight: 700; line-height: 1.5; }
+.leave-good .leave-result { color: #1a7a50; }
+.leave-bad  .leave-result { color: #a02020; }
+
+/* ── 콤보 ── */
+.combo-box {
+  border-radius: 18px; padding: 12px 14px;
+  background: linear-gradient(135deg, #f3f0ff, #fff5ec);
+  border: 1.5px dashed rgba(150,100,220,0.22);
+}
+.combo-tag {
+  display: inline-block; font-size: 0.65rem; font-weight: 800;
+  padding: 3px 10px; border-radius: 999px;
+  background: linear-gradient(135deg, var(--jiho), var(--jaemin));
+  color: #5a3a1a; margin-bottom: 7px; letter-spacing: 0.05em;
+}
+.combo-text { font-size: 0.72rem; color: var(--muted); font-weight: 600; line-height: 1.55; }
+
+/* ── 비용 ── */
+.cost-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.cost-chip {
+  font-size: 0.68rem; font-weight: 700; padding: 4px 12px; border-radius: 999px;
+  background: rgba(180,140,200,0.09); color: var(--muted);
+  border: 1px solid rgba(180,140,200,0.18);
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <a class="back-link" href="../index.html">← REWIND 2026</a>
+  <div class="page-title">👥 동반자들</div>
+  <div class="page-sub">Companions</div>
+</div>
+
+<div class="grid">
+
+  <!-- 나비 -->
+  <div class="card card-nabi">
+    <div class="card-hero">
+      <div class="hero-bg"></div>
+      <div class="avatar">🐱</div>
+      <div class="char-name">나비 — 유기묘</div>
+      <div class="char-role">잠입 · 탐색 · 회피 포지션</div>
+      <span class="badge">E — 동물복지</span>
+    </div>
+    <div class="card-body">
+      <div>
+        <div class="section-label">패시브 — 이벤트 발생 시 선택지 해금</div>
+        <div class="trigger-list">
+          <div class="trigger-item">
+            <div class="trigger-event">"괴물 고양이" 이벤트</div>
+            <div class="trigger-unlock">→ 선택지 해금: "나비가 길을 연다" (안전 탈출, 멘탈 손실 없음)</div>
+          </div>
+          <div class="trigger-item">
+            <div class="trigger-event">모든 "잠입·침투" 이벤트</div>
+            <div class="trigger-unlock">→ 선택지 해금: "나비를 먼저 들여보낸다" (실패 패널티 면제)</div>
+          </div>
+        </div>
+      </div>
+      <hr class="divider"/>
+      <div>
+        <div class="section-label">이탈 조건</div>
+        <div class="leave-list">
+          <div class="leave-item leave-good">
+            <span class="leave-tag">좋은 이유로 떠남</span>
+            <div class="leave-event">"떠돌이 호랑이" 이벤트</div>
+            <div class="leave-choice">선택지: "나비와 거대 고양이를 이어준다"</div>
+            <div class="leave-result">아이템 획득: [나비의 발자국] — 1회용, 어떤 잠입 이벤트에서든 자동 성공</div>
+          </div>
+          <div class="leave-item leave-bad">
+            <span class="leave-tag">나쁜 이유로 떠남</span>
+            <div class="leave-event">"유기동물 단속" 이벤트</div>
+            <div class="leave-choice">선택지: "단속반에 나비를 넘긴다" (자금 +8 유혹)</div>
+            <div class="leave-result">패널티: SV -20, 멘탈 -15, 이후 모든 이벤트에서 "배신자" 꼬리표 부여</div>
+          </div>
+        </div>
+      </div>
+      <div class="cost-row"><span class="cost-chip">유지비: 자금 -3/턴</span></div>
+    </div>
+  </div>
+
+  <!-- 루카 -->
+  <div class="card card-luca">
+    <div class="card-hero">
+      <div class="hero-bg"></div>
+      <div class="avatar">♿</div>
+      <div class="char-name">루카 — 휠체어 청년</div>
+      <div class="char-role">독심 · 멘탈 회복 · 네트워크 포지션</div>
+      <span class="badge">S — 장애 포용</span>
+    </div>
+    <div class="card-body">
+      <div>
+        <div class="section-label">패시브 — 이벤트 발생 시 선택지 해금</div>
+        <div class="trigger-list">
+          <div class="trigger-item">
+            <div class="trigger-event">모든 "대화·협상·설득" 이벤트</div>
+            <div class="trigger-unlock">→ 선택지 해금: "루카가 상대의 진심을 읽는다" (최선 응답 제시, SV +5 보너스)</div>
+          </div>
+          <div class="trigger-item">
+            <div class="trigger-event">"세라의 멘탈 위기" 이벤트 (멘탈 30 이하 시 발생)</div>
+            <div class="trigger-unlock">→ 선택지 해금: "루카의 요리를 먹는다" (멘탈 +20 회복)</div>
+          </div>
+        </div>
+      </div>
+      <hr class="divider"/>
+      <div>
+        <div class="section-label">이탈 조건</div>
+        <div class="leave-list">
+          <div class="leave-item leave-good">
+            <span class="leave-tag">좋은 이유로 떠남</span>
+            <div class="leave-event">"미래로 돌아가는 문" 이벤트 (엔딩 직전)</div>
+            <div class="leave-choice">선택지: "루카를 2050년으로 먼저 돌려보낸다"</div>
+            <div class="leave-result">아이템 획득: [루카의 레시피] — 1회용, 어느 때든 멘탈 +30 즉시 회복</div>
+          </div>
+          <div class="leave-item leave-bad">
+            <span class="leave-tag">나쁜 이유로 떠남</span>
+            <div class="leave-event">"장애인 시설 강제 입소" 이벤트</div>
+            <div class="leave-choice">선택지: "루카를 시설에 맡기면 편해질 것 같다"</div>
+            <div class="leave-result">패널티: SV -25, 이후 모든 협상 이벤트에서 "진심 읽기" 선택지 영구 차단</div>
+          </div>
+        </div>
+      </div>
+      <div class="cost-row"><span class="cost-chip">유지비: 식량 -2/턴</span></div>
+    </div>
+  </div>
+
+  <!-- 지호 -->
+  <div class="card card-jiho">
+    <div class="card-hero">
+      <div class="hero-bg"></div>
+      <div class="avatar">⚖️</div>
+      <div class="char-name">지호 — 전직 노무사</div>
+      <div class="char-role">법률 · 증거 · 내부고발 포지션</div>
+      <span class="badge">G — 내부고발</span>
+    </div>
+    <div class="card-body">
+      <div>
+        <div class="section-label">패시브 — 이벤트 발생 시 선택지 해금</div>
+        <div class="trigger-list">
+          <div class="trigger-item">
+            <div class="trigger-event">모든 "노동·계약·부당행위" 이벤트</div>
+            <div class="trigger-unlock">→ 선택지 해금: "지호가 법적 대응을 준비한다" (SV +18, 이후 턴 자금 회수 가능)</div>
+          </div>
+          <div class="trigger-item">
+            <div class="trigger-event">"기업 문서 입수" 이벤트</div>
+            <div class="trigger-unlock">→ 선택지 해금: "지호가 불법 조항을 짚어낸다" (증거 등급 상승, 스토리 분기 해금)</div>
+          </div>
+        </div>
+      </div>
+      <hr class="divider"/>
+      <div>
+        <div class="section-label">이탈 조건</div>
+        <div class="leave-list">
+          <div class="leave-item leave-good">
+            <span class="leave-tag">좋은 이유로 떠남</span>
+            <div class="leave-event">"공익 제보자 보호법 통과" 이벤트 (SV 60 이상 시 발생)</div>
+            <div class="leave-choice">선택지: "지호를 공식 제보자로 세운다"</div>
+            <div class="leave-result">아이템 획득: [지호의 내용증명] — 1회용, 어떤 이벤트에서든 상대방 행동 1회 강제 무효화</div>
+          </div>
+          <div class="leave-item leave-bad">
+            <span class="leave-tag">나쁜 이유로 떠남</span>
+            <div class="leave-event">"할아버지 측 회유" 이벤트</div>
+            <div class="leave-choice">선택지: "지호에게 위험하니 그냥 포기하라고 한다"</div>
+            <div class="leave-result">패널티: SV -20, 수집한 증거 등급 전부 1단계 하락</div>
+          </div>
+        </div>
+      </div>
+      <div class="cost-row">
+        <span class="cost-chip">유지비: 자금 -2/턴</span>
+        <span class="cost-chip">약점: 물리 충돌 시 멘탈 -15</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 소연 -->
+  <div class="card card-soyeon">
+    <div class="card-hero">
+      <div class="hero-bg"></div>
+      <div class="avatar">📡</div>
+      <div class="char-name">소연 — 프리랜서 기자</div>
+      <div class="char-role">여론 · 수사망 차단 · 정보공개 포지션</div>
+      <span class="badge">G — 언론·정보공개</span>
+    </div>
+    <div class="card-body">
+      <div>
+        <div class="section-label">패시브 — 이벤트 발생 시 선택지 해금</div>
+        <div class="trigger-list">
+          <div class="trigger-item">
+            <div class="trigger-event">"할아버지 수사망 진척" 이벤트 (수사망 +1 발생 시)</div>
+            <div class="trigger-unlock">→ 선택지 해금: "소연이 역취재로 여론을 돌린다" (수사망 +1 무효화)</div>
+          </div>
+          <div class="trigger-item">
+            <div class="trigger-event">모든 "정보 은폐·가짜 뉴스" 이벤트</div>
+            <div class="trigger-unlock">→ 선택지 해금: "소연이 현장을 생중계한다" (SV +16, 해당 이벤트 재발 차단)</div>
+          </div>
+        </div>
+      </div>
+      <hr class="divider"/>
+      <div>
+        <div class="section-label">이탈 조건</div>
+        <div class="leave-list">
+          <div class="leave-item leave-good">
+            <span class="leave-tag">좋은 이유로 떠남</span>
+            <div class="leave-event">"대형 언론사 단독 제안" 이벤트</div>
+            <div class="leave-choice">선택지: "소연에게 더 큰 무대를 양보한다"</div>
+            <div class="leave-result">아이템 획득: [소연의 특종 기사] — 1회용, 수사망 수치를 즉시 0으로 초기화</div>
+          </div>
+          <div class="leave-item leave-bad">
+            <span class="leave-tag">나쁜 이유로 떠남</span>
+            <div class="leave-event">"기업 측 협박" 이벤트</div>
+            <div class="leave-choice">선택지: "소연을 취재에서 배제해 위험을 피하게 한다"</div>
+            <div class="leave-result">패널티: SV -15, 이후 수사망 +1 이벤트 발생 시 무효화 선택지 영구 차단</div>
+          </div>
+        </div>
+      </div>
+      <div class="cost-row">
+        <span class="cost-chip">유지비: 식량 -2/턴</span>
+        <span class="cost-chip">약점: 잠입 이벤트 시 동반 선택지 차단</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 옥순 -->
+  <div class="card card-oksun">
+    <div class="card-hero">
+      <div class="hero-bg"></div>
+      <div class="avatar">🌱</div>
+      <div class="char-name">옥순 — 협동조합 대표</div>
+      <div class="char-role">공동체 · 주민자치 · 신뢰 포지션</div>
+      <span class="badge">G — 협동조합</span>
+    </div>
+    <div class="card-body">
+      <div>
+        <div class="section-label">패시브 — 이벤트 발생 시 선택지 해금</div>
+        <div class="trigger-list">
+          <div class="trigger-item">
+            <div class="trigger-event">모든 "마을·공동체·재개발" 이벤트</div>
+            <div class="trigger-unlock">→ 선택지 해금: "옥순 할머니가 주민들을 모은다" (SV +14, 자금 +5 모금)</div>
+          </div>
+          <div class="trigger-item">
+            <div class="trigger-event">"주민 불신·갈등" 이벤트</div>
+            <div class="trigger-unlock">→ 선택지 해금: "옥순 할머니의 한마디" (갈등 즉시 봉합, 멘탈 +10)</div>
+          </div>
+        </div>
+      </div>
+      <hr class="divider"/>
+      <div>
+        <div class="section-label">이탈 조건</div>
+        <div class="leave-list">
+          <div class="leave-item leave-good">
+            <span class="leave-tag">좋은 이유로 떠남</span>
+            <div class="leave-event">"동네 태양광 조합 위기" 이벤트</div>
+            <div class="leave-choice">선택지: "옥순 할머니가 동네로 돌아가야 할 것 같다"</div>
+            <div class="leave-result">아이템 획득: [옥순의 반상회 연락망] — 1회용, 어떤 마을 이벤트에서든 주민 전원 즉시 집결</div>
+          </div>
+          <div class="leave-item leave-bad">
+            <span class="leave-tag">나쁜 이유로 떠남</span>
+            <div class="leave-event">"재개발 찬성 회유" 이벤트</div>
+            <div class="leave-choice">선택지: "할머니, 그냥 보상금 받고 이사 가시는 게 낫지 않겠어요?"</div>
+            <div class="leave-result">패널티: SV -20, 멘탈 -10, 이후 공동체 이벤트 SV 획득량 절반 감소</div>
+          </div>
+        </div>
+      </div>
+      <div class="cost-row">
+        <span class="cost-chip">유지비: 식량 -1/턴</span>
+        <span class="cost-chip">약점: 빠른 이동 이벤트 시 동반 선택지 차단</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 재민 -->
+  <div class="card card-jaemin">
+    <div class="card-hero">
+      <div class="hero-bg"></div>
+      <div class="avatar">💸</div>
+      <div class="char-name">재민 — 크라우드 기획자</div>
+      <div class="char-role">자금조달 · 엔딩 분기 · 임팩트 포지션</div>
+      <span class="badge">G — 크라우드펀딩</span>
+    </div>
+    <div class="card-body">
+      <div>
+        <div class="section-label">패시브 — 이벤트 발생 시 선택지 해금</div>
+        <div class="trigger-list">
+          <div class="trigger-item">
+            <div class="trigger-event">모든 "자금난·폐업 위기" 이벤트</div>
+            <div class="trigger-unlock">→ 선택지 해금: "재민이 긴급 펀딩을 연다" (자금 +15, 다음 턴 SV 획득 -5 부담)</div>
+          </div>
+          <div class="trigger-item">
+            <div class="trigger-event">"사회적 임팩트 인정" 이벤트 (SV 50 이상 구간)</div>
+            <div class="trigger-unlock">→ 선택지 해금: "재민이 임팩트 투자자를 연결한다" (자금 +20, 굿 엔딩 확정 플래그 ON)</div>
+          </div>
+        </div>
+      </div>
+      <hr class="divider"/>
+      <div>
+        <div class="section-label">이탈 조건</div>
+        <div class="leave-list">
+          <div class="leave-item leave-good">
+            <span class="leave-tag">좋은 이유로 떠남</span>
+            <div class="leave-event">"소셜벤처 단독 투자 제안" 이벤트 (지호 이미 이탈 후 발생)</div>
+            <div class="leave-choice">선택지: "재민이 직접 창업할 수 있도록 응원한다"</div>
+            <div class="leave-result">아이템 획득: [재민의 투자 계약서] — 1회용, 자금 +30 즉시 획득</div>
+          </div>
+          <div class="leave-item leave-bad">
+            <span class="leave-tag">나쁜 이유로 떠남</span>
+            <div class="leave-event">"재민의 자금 이탈" 이벤트 (자금 0 상태 2턴 연속 시 강제 발생)</div>
+            <div class="leave-choice">자동 발생 — 선택지 없음 (현실주의자, 조건 충족 시 무조건 이탈)</div>
+            <div class="leave-result">패널티: SV -15, 자금 -5 추가, 이후 "긴급 펀딩" 선택지 영구 차단</div>
+          </div>
+        </div>
+      </div>
+      <div class="combo-box">
+        <span class="combo-tag">✦ 콤보</span>
+        <div class="combo-text">지호 + 재민 동반 시 "법인 설립" 이벤트 발생, 선택지 해금: "소셜벤처로 법인화한다" (SV +20, 자금 +10)</div>
+      </div>
+      <div class="cost-row"><span class="cost-chip">유지비: 자금 -3/턴 (최고)</span></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
