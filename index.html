@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>REWIND 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nunito:wght@400;600;700;800;900&family=Nanum+Pen+Script&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --pink:    #ffb7c5;
+      --peach:   #ffd6b0;
+      --lavender:#d4bbf5;
+      --mint:    #b4e8d8;
+      --sky:     #b8d9f7;
+      --yellow:  #fde9a2;
+      --bg:      #fff8f5;
+      --text:    #4a3a4a;
+      --card-shadow: 0 6px 28px rgba(180,130,180,0.13);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      font-family: 'Nunito', 'Apple SD Gothic Neo', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ── 배경 효과 ── */
+    .bg-bubbles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .bubble { position: absolute; border-radius: 50%; opacity: 0.35; animation: float linear infinite; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); opacity: .35; }
+      50% { transform: translateY(-30px) scale(1.05); opacity: .45; }
+    }
+
+    .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .star { position: absolute; border-radius: 50%; background: white; animation: twinkle ease-in-out infinite; }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.4); }
+    }
+
+    /* ── 레이아웃 ── */
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 60px 24px 80px;
+    }
+
+    .tag {
+      background: var(--lavender);
+      color: #7c5abf;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      animation: popIn 0.5s cubic-bezier(.34,1.56,.64,1) both;
+    }
+
+    .title-wrap { text-align: center; margin-bottom: 10px; animation: popIn 0.55s .1s cubic-bezier(.34,1.56,.64,1) both; }
+    .title-main {
+      font-size: clamp(3.2rem, 10vw, 7rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #e07aaa 0%, #a97bdb 45%, #79aadb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 4px 12px rgba(180,120,200,0.18));
+    }
+    .title-year {
+      display: block;
+      font-family: 'Gowun Batang', serif;
+      font-size: clamp(1.1rem, 3.5vw, 1.8rem);
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      color: #c49ae0;
+      margin-top: 4px;
+    }
+
+    .subtitle {
+      font-family: 'Nanum Pen Script', cursive;
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      color: #b08ab0;
+      margin-bottom: 40px;
+      animation: popIn 0.55s .2s cubic-bezier(.34,1.56,.64,1) both;
+    }
+
+    /* ── 버튼 그리드 (5개 항목 대응) ── */
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      width: 100%;
+      max-width: 540px;
+    }
+
+    /* 마지막 스킬 버튼을 중앙 정렬하기 위한 설정 */
+    .btn-full { grid-column: span 2; }
+
+    .nav-btn {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 24px 20px;
+      border-radius: 24px;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.22s cubic-bezier(.34,1.56,.64,1), box-shadow 0.2s ease;
+      box-shadow: var(--card-shadow);
+      animation: popIn 0.5s both;
+    }
+    
+    .nav-btn:hover { transform: translateY(-6px) scale(1.03); }
+    .nav-btn:active { transform: translateY(-2px) scale(0.99); }
+
+    /* 배경색 지정 */
+    .btn-story      { background: linear-gradient(145deg, #ffd6e7, #ffb7c5); animation-delay: .3s; }
+    .btn-companions { background: linear-gradient(145deg, #e8d5f8, #d4bbf5); animation-delay: .38s; }
+    .btn-events     { background: linear-gradient(145deg, #ffeac0, #fde9a2); animation-delay: .46s; }
+    .btn-endings    { background: linear-gradient(145deg, #bff0e4, #b4e8d8); animation-delay: .54s; }
+    .btn-skills     { background: linear-gradient(145deg, #d2e9ff, #b8d9f7); animation-delay: .62s; }
+
+    .btn-emoji { font-size: 2.2rem; transition: transform 0.3s; }
+    .nav-btn:hover .btn-emoji { transform: scale(1.2) rotate(-5deg); }
+    .btn-label { font-weight: 800; font-size: 1rem; }
+    .btn-sub { font-size: 0.72rem; font-weight: 600; color: rgba(74,58,74,0.6); }
+
+    .footer { margin-top: 52px; font-size: 0.72rem; color: #c8b0c8; font-weight: 600; animation: fadeUp 0.5s .7s both; }
+
+    @keyframes popIn {
+      0%   { opacity: 0; transform: scale(.8) translateY(16px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes fadeUp {
+      0%   { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 450px) {
+      .nav-grid { grid-template-columns: 1fr; }
+      .btn-full { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-bubbles" id="bubbles"></div>
+<div class="stars" id="stars"></div>
+
+<div class="wrapper">
+  <div class="tag">✦ SVR PRODUCTIONS ✦</div>
+
+  <div class="title-wrap">
+    <span class="title-main">REWIND</span>
+    <span class="title-year">2 0 2 6</span>
+  </div>
+
+  <p class="subtitle">다시 돌아간다면, 어떤 선택을 할까요 🌸</p>
+
+  <nav class="nav-grid">
+    <a href="storyline/rewind2026_story.html" class="nav-btn btn-story">
+      <span class="btn-emoji">📖</span>
+      <span class="btn-label">스토리라인</span>
+      <span class="btn-sub">storyline</span>
+    </a>
+
+    <a href="companions/rewind2026_companions_v3.html" class="nav-btn btn-companions">
+      <span class="btn-emoji">👥</span>
+      <span class="btn-label">동반자들</span>
+      <span class="btn-sub">companions</span>
+    </a>
+
+    <a href="events/index.html" class="nav-btn btn-events">
+      <span class="btn-emoji">🎪</span>
+      <span class="btn-label">이벤트</span>
+      <span class="btn-sub">events</span>
+    </a>
+
+    <a href="endings/index.html" class="nav-btn btn-endings">
+      <span class="btn-emoji">🌿</span>
+      <span class="btn-label">엔딩</span>
+      <span class="btn-sub">endings</span>
+    </a>
+
+    <a href="skills/index_skills.html" class="nav-btn btn-skills btn-full">
+      <span class="btn-emoji">✨</span>
+      <span class="btn-label">보유 스킬</span>
+      <span class="btn-sub">skills</span>
+    </a>
+  </nav>
+
+  <p class="footer">© 2026 REWIND · All rights reserved 🎀</p>
+</div>
+
+<script>
+  // 배경 버블 생성 logic (기존 유지)
+  const colors = ['#ffb7c5','#d4bbf5','#fde9a2','#b4e8d8','#b8d9f7','#ffd6b0'];
+  const bubblesEl = document.getElementById('bubbles');
+  for (let i = 0; i < 14; i++) {
+    const b = document.createElement('div');
+    b.className = 'bubble';
+    const size = 60 + Math.random() * 160;
+    b.style.cssText = `width:${size}px; height:${size}px; left:${Math.random()*100}%; top:${Math.random()*100}%; background:${colors[Math.floor(Math.random()*colors.length)]}; animation-duration:${5+Math.random()*7}s; animation-delay:-${Math.random()*6}s;`;
+    bubblesEl.appendChild(b);
+  }
+
+  // 별 생성 logic (기존 유지)
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 30; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = 2 + Math.random() * 3.5;
+    s.style.cssText = `width:${size}px; height:${size}px; left:${Math.random()*100}%; top:${Math.random()*100}%; animation-duration:${2+Math.random()*3}s; animation-delay:-${Math.random()*4}s;`;
+    starsEl.appendChild(s);
+  }
+</script>
+</body>
+</html>
